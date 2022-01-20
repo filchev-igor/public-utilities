@@ -1,4 +1,7 @@
+'use strict';
+
 import Bills from "./components/Bills";
+import AmountOfConsumed from "./components/AmountOfConsumed";
 
 class App {
     #root = document.getElementById('root');
@@ -29,7 +32,9 @@ class App {
 
         setTimeout(() => {
             clearInterval(interval);
-        }, 10_000);
+
+            root.innerHTML = AmountOfConsumed;
+        }, 2_000);
     }
 }
 
