@@ -33,7 +33,7 @@ class App {
         setTimeout(() => {
             clearInterval(interval);
 
-            root.innerHTML = AmountOfConsumed;
+             root.innerHTML =  AmountOfConsumed();
         }, 2_000);
     }
 }

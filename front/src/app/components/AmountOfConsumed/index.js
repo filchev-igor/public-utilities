@@ -1,5 +1,15 @@
+import Navbar from '../Navbar';
+
 const AmountOfConsumed = () => {
-    return 39;
+    const navbar = Navbar();
+
+    return (`
+    ${navbar}
+    
+    
+    39;
+    `);
+
 };
 
 export default AmountOfConsumed;
