@@ -31,7 +31,12 @@ const Navbar = () => {
             element.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                //location.replace(element.href);
+                const obj = {
+                    path: element.href.split('/')[3]
+                };
+
+                history.replaceState(obj, "", "/");
+                location.replace("/");
             });
         }
 
