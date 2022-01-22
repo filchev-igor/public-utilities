@@ -1,7 +1,7 @@
-'use strict';
+import 'materialize-css/dist/css/materialize.min.css';
 
-import Bills from "./components/Bills";
-import AmountOfConsumed from "./components/AmountOfConsumed";
+import Bills from "./app/components/Bills";
+import AmountOfConsumed from "./app/components/AmountOfConsumed";
 
 class App {
     #root = document.getElementById('root');
@@ -9,17 +9,13 @@ class App {
     render() {
         const root = this.#root;
 
-        /*
-        Example code. Can be erased
-         */
-        const billsPage = Bills();
         const button = (`<button type='button'>Click me!</button>`);
 
         let i = 0;
 
         const interval = setInterval(() => {
             if (i)
-                root.innerHTML = billsPage;
+                root.innerHTML = Bills();
             else
                 root.innerHTML = button;
 
