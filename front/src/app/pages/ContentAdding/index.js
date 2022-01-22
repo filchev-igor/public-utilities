@@ -1,9 +1,9 @@
 import Navbar from '../../components/Navbar';
 
-const Settings = () => {
+const ContentAdding = () => {
   return (`
     ${Navbar()}
   `);
 };
 
-export default Settings;
+export default ContentAdding;
