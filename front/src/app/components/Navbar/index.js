@@ -1,5 +1,4 @@
 import {PAGES} from '../../constants/navbar';
-import EventObserver from '../../utils/EventObserver';
 import { v4 as uuidv4 } from 'uuid';
 
 const Navbar = () => {
@@ -24,7 +23,7 @@ const Navbar = () => {
     /*
     Link go event is being mocked here
      */
-    window.onload = function() {
+    window.onload = () => {
         for (const id of linksId) {
             const element = document.getElementById(id);
 
@@ -39,9 +38,7 @@ const Navbar = () => {
                 location.replace("/");
             });
         }
-
     };
-
 
     return (`
         <nav>

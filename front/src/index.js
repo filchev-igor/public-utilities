@@ -3,8 +3,7 @@ import AmountOfConsumed from "./app/pages/AmountOfConsumed";
 import {
     AMOUNTS_OF_CONSUMED,
     BILLS, CONTACTS, CONTENT_ADDING,
-    HOME,
-    NEWS_AND_MESSAGES,
+    NEWS_AND_MESSAGES, PAGES,
     SETTINGS,
 } from './app/constants/navbar';
 import {DEFAULT_PATH} from './app/constants/navigation';
@@ -14,47 +13,58 @@ import NewsAndMessages from './app/pages/NewsAndMessages';
 import Contacts from './app/pages/Contacts';
 import ContentAdding from './app/pages/ContentAdding';
 import Home from './app/pages/Home';
+import Page404 from './app/pages/Page404';
 
 class App {
     #root = document.getElementById('root');
 
     render() {
+        let Component;
         const root = this.#root;
 
         const {state} = history;
         const {path} = state ?? DEFAULT_PATH;
 
-        const currentPath = path
+        const inputPath = location.pathname
+        .split('/')[1]
+        .split('-')
+        .join(' ');
+
+        const isInputLocationExisting = PAGES.includes(inputPath);
+
+        const currentPath = isInputLocationExisting ? inputPath : path
             .split('-')
             .join(' ');
 
-        let Component = Home;
+        const isPageSelected = PAGES.includes(currentPath);
 
-        switch (currentPath) {
-            case SETTINGS:
-                Component = Settings;
-                break;
-            case BILLS:
-                Component = Bills;
-                break;
-            case NEWS_AND_MESSAGES:
-                Component = NewsAndMessages;
-                break;
-            case CONTACTS:
-                Component = Contacts;
-                break;
-            case AMOUNTS_OF_CONSUMED:
-                Component = AmountOfConsumed;
-                break;
-            case CONTENT_ADDING:
-                Component = ContentAdding;
-                break;
-            case HOME:
-                Component = Home;
-                break;
+        if (currentPath === SETTINGS) {
+            Component = Settings;
+        } else if (currentPath === BILLS) {
+            Component = Bills;
+        } else if (currentPath === NEWS_AND_MESSAGES) {
+            Component = NewsAndMessages;
+        } else if (currentPath === CONTACTS) {
+            Component = Contacts;
+        } else if (currentPath === AMOUNTS_OF_CONSUMED) {
+            Component = AmountOfConsumed;
+        } else if (currentPath === CONTENT_ADDING) {
+            Component = ContentAdding;
+        } else {
+            Component = Home;
         }
 
-        root.innerHTML =  Component();
+        const obj = {
+            path: currentPath
+        };
+
+        if (isInputLocationExisting || isPageSelected)
+            history.replaceState(obj, "", `/${currentPath !== 'home' ? currentPath : ''}`);
+
+        console.log(path, inputPath, currentPath);
+        console.log(isInputLocationExisting || isPageSelected, isInputLocationExisting, isPageSelected);
+
+        root.innerHTML = isInputLocationExisting || isPageSelected ? Component() : Page404();
     }
 }
 
