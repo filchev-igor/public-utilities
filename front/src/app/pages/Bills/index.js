@@ -1,4 +1,5 @@
 import {getBillsType} from "../../api/example.js";
+import Navbar from '../../components/Navbar';
 
 const Bills = () => {
     /*
@@ -7,6 +8,8 @@ const Bills = () => {
     const billsTypes = getBillsType();
 
     return (`
+        ${Navbar()}
+        
         <div>Here is the content of the bills page. Fetch url: ${billsTypes}</div>
     `);
 };
