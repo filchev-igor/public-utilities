@@ -1,3 +1,5 @@
+import 'materialize-css/dist/css/materialize.min.css';
+
 const Navbar = () => {
     return (`
     <nav>
@@ -10,7 +12,7 @@ const Navbar = () => {
       </ul>
     </div>
   </nav>
-  
-  
     `);
 };
+
+export default Navbar;
