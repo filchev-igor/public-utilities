@@ -1,7 +1,6 @@
 //import {getBillsType} from "../../api/example.js";
 import Navbar from '../../components/Navbar';
 import { v4 as uuidv4 } from 'uuid';
-import M from 'materialize-css';
 
 const Bills = () => {
     const collapsibleId = uuidv4();
@@ -10,7 +9,6 @@ const Bills = () => {
         window.onload = () => {
             const element = document.getElementById(collapsibleId);
 
-            M.Collapsible.init(element);
         }
     });
 
@@ -34,8 +32,6 @@ const Bills = () => {
                 </button>
                     </div>
                   </div>
-                  
-                  
                   
                   <ul class="collapsible" id=${collapsibleId}>
                 <li>
