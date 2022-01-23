@@ -4,7 +4,8 @@ const NewsAndMessages = () => {
   return (`
     ${Navbar()}
     
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col s12 m6">
               <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
@@ -23,6 +24,7 @@ const NewsAndMessages = () => {
               </div>
             </div>
         </div>
+    </div>
   `);
 };
 
