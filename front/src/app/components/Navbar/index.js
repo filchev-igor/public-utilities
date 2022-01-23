@@ -1,5 +1,6 @@
 import {PAGES} from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
+import image from "../../../favicon.png";
 
 const Navbar = () => {
     const linksId = [];
@@ -43,7 +44,9 @@ const Navbar = () => {
     return (`
         <nav>
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Logo</a>
+          <a href="/" class="brand-logo">
+                <img src=${image}>
+            </a>
           
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             ${links}
