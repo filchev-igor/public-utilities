@@ -4,7 +4,7 @@ const AmountOfConsumed = () => {
     return (`
         ${Navbar()}
     
-        39 
+        #Insert table here (For current month and previous ones)
     `);
 };
 
