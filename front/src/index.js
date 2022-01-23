@@ -31,13 +31,14 @@ class App {
         .split('-')
         .join(' ');
 
+        const isLocationInputEventFired = !!inputPath;
         const isInputLocationExisting = PAGES.includes(inputPath);
 
-        const currentPath = isInputLocationExisting ? inputPath : path
+        const currentPath = isLocationInputEventFired && isInputLocationExisting
+          ? inputPath
+          : path
             .split('-')
             .join(' ');
-
-        const isPageSelected = PAGES.includes(currentPath);
 
         if (currentPath === SETTINGS) {
             Component = Settings;
@@ -55,14 +56,26 @@ class App {
             Component = Home;
         }
 
-        const obj = {
-            path: currentPath
-        };
+        if (isLocationInputEventFired && !isInputLocationExisting) {
+            root.innerHTML = Page404();
 
-        if (isInputLocationExisting || isPageSelected)
-            history.replaceState(obj, "", `/${currentPath !== 'home' ? currentPath : ''}`);
+            history.replaceState(
+              { path: inputPath },
+              "",
+              `/${inputPath.split(' ').join('-')}`
+            );
+        }
+        else {
+            root.innerHTML = Component();
 
-        root.innerHTML = isInputLocationExisting || isPageSelected ? Component() : Page404();
+            history.replaceState(
+              { path: currentPath },
+              "",
+              `/${currentPath !== 'home'
+                ? currentPath.split(' ').join('-')
+                : ''}`
+            );
+        }
     }
 }
 
