@@ -1,4 +1,4 @@
-import {PAGES} from '../../constants/navbar';
+import { AUTHENTICATED_USER_PAGES } from '../../constants/navbar'
 import { v4 as uuidv4 } from 'uuid';
 import logo from "../../../../favicon.png";
 import "../../../../css/index.scss";
@@ -6,7 +6,7 @@ import "../../../../css/index.scss";
 const Navbar = () => {
     const linksId = [];
 
-    const links = PAGES
+    const links = AUTHENTICATED_USER_PAGES
     .map(value => {
         const link = value
         .split(' ')

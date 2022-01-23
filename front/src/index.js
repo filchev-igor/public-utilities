@@ -4,7 +4,7 @@ import AmountOfConsumed from "./app/pages/AmountOfConsumed";
 import {
     AMOUNTS_OF_CONSUMED,
     BILLS, CONTACTS, CONTENT_ADDING,
-    NEWS_AND_MESSAGES, PAGES,
+    NEWS_AND_MESSAGES, AUTHENTICATED_USER_PAGES,
     SETTINGS,
 } from './app/constants/navbar';
 import {DEFAULT_PATH} from './app/constants/navigation';
@@ -15,13 +15,15 @@ import Contacts from './app/pages/Contacts';
 import ContentAdding from './app/pages/ContentAdding';
 import Home from './app/pages/Home';
 import Page404 from './app/pages/Page404';
+import { initializeApp } from 'firebase/app'
+import { FIREBASE_CONFIG } from './app/constants/firebase'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 class App {
     #root = document.getElementById('root');
 
-    render() {
+    render = () => {
         let Component;
-        const root = this.#root;
 
         const {state} = history;
         const {path} = state ?? DEFAULT_PATH;
@@ -32,13 +34,26 @@ class App {
         .join(' ');
 
         const isLocationInputEventFired = !!inputPath;
-        const isInputLocationExisting = PAGES.includes(inputPath);
+        const isInputLocationExisting = AUTHENTICATED_USER_PAGES.includes(inputPath);
 
         const currentPath = isLocationInputEventFired && isInputLocationExisting
           ? inputPath
           : path
-            .split('-')
-            .join(' ');
+          .split('-')
+          .join(' ');
+
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+
+                console.log('authentication status: passed!');
+            } else {
+                console.log('authentication status: failed!');
+
+                //location.replace("/login");
+            }
+        });
 
         if (currentPath === SETTINGS) {
             Component = Settings;
@@ -57,7 +72,7 @@ class App {
         }
 
         if (isLocationInputEventFired && !isInputLocationExisting) {
-            root.innerHTML = Page404();
+            this.#root.innerHTML = Page404();
 
             history.replaceState(
               { path: inputPath },
@@ -66,18 +81,20 @@ class App {
             );
         }
         else {
-            root.innerHTML = Component();
+            this.#root.innerHTML = Component();
 
             history.replaceState(
               { path: currentPath },
               "",
-              `/${currentPath !== 'home'
+              `/${currentPath !== 'news and messages'
                 ? currentPath.split(' ').join('-')
                 : ''}`
             );
         }
     }
 }
+
+initializeApp(FIREBASE_CONFIG);
 
 const app = new App();
 app.render();

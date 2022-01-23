@@ -1,1 +1,0 @@
-export const BILLS_TYPE_URL = 'https://www.pu.lt/bills-type';
