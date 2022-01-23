@@ -1,3 +1,3 @@
 export const DEFAULT_PATH = {
-  path: 'home'
+  path: 'news and messages'
 };

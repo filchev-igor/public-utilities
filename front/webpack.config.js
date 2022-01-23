@@ -1,8 +1,16 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: "development",
+  resolve: {
+    fallback: {
+      "fs": false,
+      "path": false,
+      "os": false
+    },
+  },
   entry: "./src/index.js",
   output: {
     filename: "index.js",
@@ -12,10 +20,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
       favicon: "favicon.png"
-    })
+    }),
+    new Dotenv()
   ],
   module: {
-
     rules: [
       {
         test: /\.(sc|c)ss$/,
@@ -26,7 +34,8 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: false
+              modules: false,
+              //importLoaders: 1
             }
           },
           // Compiles Sass to CSS
