@@ -1,4 +1,5 @@
 import 'materialize-css/dist/css/materialize.min.css';
+import 'material-icons/iconfont/filled.css';
 import AmountOfConsumed from "./app/pages/AmountOfConsumed";
 import {
     AMOUNTS_OF_CONSUMED,
@@ -60,9 +61,6 @@ class App {
 
         if (isInputLocationExisting || isPageSelected)
             history.replaceState(obj, "", `/${currentPath !== 'home' ? currentPath : ''}`);
-
-        console.log(path, inputPath, currentPath);
-        console.log(isInputLocationExisting || isPageSelected, isInputLocationExisting, isPageSelected);
 
         root.innerHTML = isInputLocationExisting || isPageSelected ? Component() : Page404();
     }
