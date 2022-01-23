@@ -1,5 +1,5 @@
-import 'materialize-css/dist/css/materialize.min.css';
 import 'material-icons/iconfont/filled.css';
+import "bootstrap/scss/bootstrap.scss";
 import AmountOfConsumed from "./app/pages/AmountOfConsumed";
 import {
     AMOUNTS_OF_CONSUMED,

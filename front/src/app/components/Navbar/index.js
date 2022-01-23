@@ -1,6 +1,6 @@
 import {PAGES} from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
-import image from "../../../../favicon.png";
+import logo from "../../../../favicon.png";
 
 const Navbar = () => {
     const linksId = [];
@@ -17,7 +17,10 @@ const Navbar = () => {
 
         const page = value[0].toUpperCase() + value.slice(1);
 
-        return (`<li><a id=${id} href="${link}">${page}</a></li>`)
+        return (`
+            <li class="nav-item">
+                <a class="nav-link" id=${id} href="${link}">${page}</a>
+            </li>`)
     })
     .join('');
 
@@ -42,17 +45,22 @@ const Navbar = () => {
     };
 
     return (`
-        <nav>
-        <div class="nav-wrapper">
-          <a href="/" class="brand-logo">
-                <img src=${image}>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src=${logo}>
             </a>
-          
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            ${links}
-          </ul>
-        </div>
-      </nav>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                ${links}
+              </ul>
+            </div>
+          </div>
+        </nav>
     `);
 };
 
