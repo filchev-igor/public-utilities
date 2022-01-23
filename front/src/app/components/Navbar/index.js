@@ -1,6 +1,6 @@
 import {PAGES} from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
-import image from "../../../favicon.png";
+import image from "../../../../favicon.png";
 
 const Navbar = () => {
     const linksId = [];
