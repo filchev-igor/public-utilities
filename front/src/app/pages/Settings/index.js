@@ -4,7 +4,7 @@ const Settings = () => {
   return (`
     ${Navbar()}
     
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col s12 m10 l10">
               <p>Your data</p>
@@ -20,7 +20,7 @@ const Settings = () => {
                 <input id="email" type="email" class="validate" autocomplete="off">
                 <label for="email">Email</label>
                 
-                <table class="highlight centered responsive-table">
+                <table class="table table-hover">
                   <thead>
                     <tr>
                         <th>Address in Vilnius</th>
