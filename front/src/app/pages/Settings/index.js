@@ -8,17 +8,30 @@ const Settings = () => {
         <div class="row">
             <div class="col s12 m10 l10">
               <p>Your data</p>
-                <input placeholder="Name" id="first_name" type="text" class="validate" autocomplete="off">
-                <label for="first_name">First Name</label>
-          
-                <input placeholder="Surname" id="surname" type="text" class="validate" autocomplete="off">
-                <label for="surname">First Name</label>
-
-                <input id="password" type="password" class="validate" autocomplete="off">
-                <label for="password">Password</label>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="firstName" placeholder="Name" autocomplete="off">
+                  <label for="firstName">Name</label>
+                </div>
                 
-                <input id="email" type="email" class="validate" autocomplete="off">
-                <label for="email">Email</label>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="surname" placeholder="Surname" autocomplete="off">
+                  <label for="surname">Surname</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off">
+                  <label for="password">Password</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" id="passwordRepeat" placeholder="Repeat password" autocomplete="off">
+                  <label for="passwordRepeat">Repeat password</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="email" placeholder="E-mail" autocomplete="off">
+                  <label for="email">E-mail</label>
+                </div>
                 
                 <table class="table table-hover">
                   <thead>
@@ -52,46 +65,32 @@ const Settings = () => {
                   </tbody>
                 </table>
                 
-                <input placeholder="New address" id="address" type="text" class="validate" autocomplete="off">
-                <label for="address">New address</label>
-                
-                <div class="switch">
-                  <label>
-                    Off
-                    <input type="checkbox">
-                    <span class="lever"></span>
-                    On Electricity
-                  </label>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="newAddress" placeholder="New address" autocomplete="off">
+                  <label for="newAddress">New address</label>
                 </div>
                 
-                <div class="switch">
-                  <label>
-                    Off
-                    <input type="checkbox">
-                    <span class="lever"></span>
-                    On Water and central heating during winter period
-                  </label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="electricity">
+                  <label class="form-check-label" for="electricity">Electricity</label>
                 </div>
                 
-                <div class="switch">
-                  <label>
-                    Off
-                    <input type="checkbox">
-                    <span class="lever"></span>
-                    On Rubbish
-                  </label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="water">
+                  <label class="form-check-label" for="water">Water and central heating during winter period</label>
                 </div>
                 
-                <div class="switch">
-                  <label>
-                    Off
-                    <input type="checkbox">
-                    <span class="lever"></span>
-                    On Land rent
-                  </label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="rubbish">
+                  <label class="form-check-label" for="rubbish">Rubbish</label>
                 </div>
                 
-                <a class="waves-effect waves-light btn">Submit</a>                
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="gas">
+                  <label class="form-check-label" for="gas">Gas</label>
+                </div>
+                
+                <button type="button" class="btn btn-success">Add new address</button>               
             </div>
         </div>
     </div>
