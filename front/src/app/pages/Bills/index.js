@@ -1,17 +1,7 @@
 //import {getBillsType} from "../../api/example.js";
 import Navbar from '../../components/Navbar';
-import { v4 as uuidv4 } from 'uuid';
 
 const Bills = () => {
-    const collapsibleId = uuidv4();
-
-    document.addEventListener('DOMContentLoaded', function() {
-        window.onload = () => {
-            const element = document.getElementById(collapsibleId);
-
-        }
-    });
-
     return (`
         ${Navbar()}
         
@@ -34,7 +24,7 @@ const Bills = () => {
                         </div>
                       </div>
                       
-                      <ul class="collapsible" id=${collapsibleId}>
+                      <ul class="collapsible">
                     <li>
                       <div class="collapsible-header"><i class="material-icons">filter_drama</i>December 2021</div>
                       <div class="collapsible-body">

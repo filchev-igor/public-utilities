@@ -1,4 +1,4 @@
-import Navbar from '../../components/Navbar';
+import Navbar from '../../components/Navbar'
 
 const NewsAndMessages = () => {
   return (`
@@ -25,7 +25,7 @@ const NewsAndMessages = () => {
             </div>
         </div>
     </div>
-  `);
-};
+  `)
+}
 
-export default NewsAndMessages;
+export default NewsAndMessages

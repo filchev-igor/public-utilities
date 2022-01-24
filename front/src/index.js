@@ -3,100 +3,93 @@ import "bootstrap/scss/bootstrap.scss";
 import AmountOfConsumed from "./app/pages/AmountOfConsumed";
 import {
     AMOUNTS_OF_CONSUMED,
-    BILLS, CONTACTS, CONTENT_ADDING,
-    NEWS_AND_MESSAGES, AUTHENTICATED_USER_PAGES,
+    AUTHENTICATED_PAGES,
+    BILLS,
+    CONTACTS,
+    CONTENT_ADDING,
+    LOGIN,
+    NEWS_AND_MESSAGES,
     SETTINGS,
-} from './app/constants/navbar';
-import {DEFAULT_PATH} from './app/constants/navigation';
+    SIGN_UP,
+} from './app/constants/navbar'
 import Bills from './app/pages/Bills';
 import Settings from './app/pages/Settings';
 import NewsAndMessages from './app/pages/NewsAndMessages';
 import Contacts from './app/pages/Contacts';
 import ContentAdding from './app/pages/ContentAdding';
-import Home from './app/pages/Home';
 import Page404 from './app/pages/Page404';
-//import { initializeApp } from 'firebase/app'
-//import { FIREBASE_CONFIG } from './app/constants/firebase'
-//import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { initializeApp } from 'firebase/app';
+import { FIREBASE_CONFIG } from './app/constants/firebase';
+import Login from './app/pages/Login';
+import Signup from './app/pages/Signup';
+import useAuth from './app/utils/useAuth';
 
 class App {
     #root = document.getElementById('root');
+    #isAuthInitialized = false;
 
-    render = () => {
+    constructor (isAuthInitialized = false) {
+        this.#isAuthInitialized = isAuthInitialized;
+
+        this.#render();
+    }
+
+    #render = () => {
         let Component;
 
-        const {state} = history;
-        const {path} = state ?? DEFAULT_PATH;
+        const { isInitializing, user } = useAuth(this.#isAuthInitialized);
 
-        const inputPath = location.pathname
-        .split('/')[1]
-        .split('-')
-        .join(' ');
+        if (isInitializing && !this.#isAuthInitialized)
+            return;
 
-        const isLocationInputEventFired = !!inputPath;
-        const isInputLocationExisting = AUTHENTICATED_USER_PAGES.includes(inputPath);
-
-        const currentPath = isLocationInputEventFired && isInputLocationExisting
-          ? inputPath
-          : path
+        const locationPath = location.pathname !== '/'
+          ? location.pathname
+          .split('/')[1]
           .split('-')
-          .join(' ');
+          .join(' ')
+          : NEWS_AND_MESSAGES;
 
-        /*
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const uid = user.uid;
+        if (!!user) {
+            const isLocationPathExisting = AUTHENTICATED_PAGES.includes(locationPath);
 
-                console.log('authentication status: passed!');
-            } else {
-                console.log('authentication status: failed!');
-
-                //location.replace("/login");
+            if (locationPath === SETTINGS) {
+                Component = Settings;
+            } else if (locationPath === BILLS) {
+                Component = Bills;
+            } else if (locationPath === CONTACTS) {
+                Component = Contacts;
+            } else if (locationPath === AMOUNTS_OF_CONSUMED) {
+                Component = AmountOfConsumed;
+            } else if (locationPath === CONTENT_ADDING) {
+                Component = ContentAdding;
+            } else if (locationPath === NEWS_AND_MESSAGES) {
+                Component = NewsAndMessages;
             }
-        });
-         */
-
-        if (currentPath === SETTINGS) {
-            Component = Settings;
-        } else if (currentPath === BILLS) {
-            Component = Bills;
-        } else if (currentPath === NEWS_AND_MESSAGES) {
-            Component = NewsAndMessages;
-        } else if (currentPath === CONTACTS) {
-            Component = Contacts;
-        } else if (currentPath === AMOUNTS_OF_CONSUMED) {
-            Component = AmountOfConsumed;
-        } else if (currentPath === CONTENT_ADDING) {
-            Component = ContentAdding;
-        } else {
-            Component = Home;
-        }
-
-        if (isLocationInputEventFired && !isInputLocationExisting) {
-            this.#root.innerHTML = Page404();
-
-            history.replaceState(
-              { path: inputPath },
-              "",
-              `/${inputPath.split(' ').join('-')}`
-            );
+            else if (!isLocationPathExisting && !locationPath.length ) {
+                Component = Page404;
+            }
         }
         else {
-            this.#root.innerHTML = Component();
+            if (locationPath === SIGN_UP) {
+                new Signup();
 
-            history.replaceState(
-              { path: currentPath },
-              "",
-              `/${currentPath !== 'news and messages'
-                ? currentPath.split(' ').join('-')
-                : ''}`
-            );
+                return;
+            }
+            else {
+                history.replaceState({ path: LOGIN }, '', `/${LOGIN}`);
+
+                new Login();
+
+                return;
+            }
         }
+
+        this.#root.innerHTML = Component();
     }
 }
 
-//initializeApp(FIREBASE_CONFIG);
+initializeApp(FIREBASE_CONFIG);
 
-const app = new App();
-app.render();
+new App();
+
+export default App;

@@ -1,16 +1,27 @@
-import { AUTHENTICATED_USER_PAGES } from '../../constants/navbar'
+import {
+  AUTHENTICATED_PAGES,
+  NEWS_AND_MESSAGES,
+  USUAL_PAGES,
+} from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
 import logo from "../../../../favicon.png";
 import "../../../../css/index.scss";
+import useAuth from '../../utils/useAuth';
+import LogOutButton from './LogOutButton';
 
 const Navbar = () => {
     const linksId = [];
 
-    const links = AUTHENTICATED_USER_PAGES
+    const { isInitializing, user } = useAuth(true);
+
+    if (isInitializing || !user)
+      return;
+
+    const links = (user ? AUTHENTICATED_PAGES : USUAL_PAGES)
     .map(value => {
-        const link = value
-        .split(' ')
-        .join('-');
+        const link = value !== NEWS_AND_MESSAGES
+          ? value.split(' ').join('-')
+          : '/';
 
         const id = uuidv4();
 
@@ -21,7 +32,7 @@ const Navbar = () => {
         return (`
             <li class="nav-item">
                 <a class="nav-link" id=${id} href="${link}">${page}</a>
-            </li>`)
+            </li>`);
     })
     .join('');
 
@@ -29,20 +40,22 @@ const Navbar = () => {
     Link go event is being mocked here
      */
     window.onload = () => {
-        for (const id of linksId) {
-            const element = document.getElementById(id);
+      for (const id of linksId) {
+          const element = document.getElementById(id);
 
-            element.addEventListener('click', (e) => {
-                e.preventDefault();
+          element.addEventListener('click', (e) => {
+            e.preventDefault();
 
-                const obj = {
-                    path: element.href.split('/')[3]
-                };
+            const path = element.href.split('/')[3];
 
-                history.replaceState(obj, "", "/");
-                location.replace("/");
-            });
-        }
+            const obj = {
+              path: path,
+            };
+
+            history.pushState(obj, '', `/${path}`);
+            location.replace(`/${path}`);
+          });
+      }
     };
 
     return (`
@@ -61,22 +74,28 @@ const Navbar = () => {
               </ul>
             </div>
           </div>
+          
           <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Language
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">LT</a></li>
-    <li><a class="dropdown-item" href="#">EN</a></li>
-  </ul>
-</div>
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Mode
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Light</a></li>
-    <li><a class="dropdown-item" href="#">Dark</a></li>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Language
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">LT</a></li>
+              <li><a class="dropdown-item" href="#">EN</a></li>
+            </ul>
+          </div>
+          
+          <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  Mode
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Light</a></li>
+                  <li><a class="dropdown-item" href="#">Dark</a></li>
+              </ul>
+          </div>
+          
+          ${user ? LogOutButton() : ''}
         </nav>
     `);
 };
