@@ -15,9 +15,9 @@ import Contacts from './app/pages/Contacts';
 import ContentAdding from './app/pages/ContentAdding';
 import Home from './app/pages/Home';
 import Page404 from './app/pages/Page404';
-import { initializeApp } from 'firebase/app'
-import { FIREBASE_CONFIG } from './app/constants/firebase'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+//import { initializeApp } from 'firebase/app'
+//import { FIREBASE_CONFIG } from './app/constants/firebase'
+//import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 class App {
     #root = document.getElementById('root');
@@ -42,6 +42,7 @@ class App {
           .split('-')
           .join(' ');
 
+        /*
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -54,6 +55,7 @@ class App {
                 //location.replace("/login");
             }
         });
+         */
 
         if (currentPath === SETTINGS) {
             Component = Settings;
@@ -94,7 +96,7 @@ class App {
     }
 }
 
-initializeApp(FIREBASE_CONFIG);
+//initializeApp(FIREBASE_CONFIG);
 
 const app = new App();
 app.render();
