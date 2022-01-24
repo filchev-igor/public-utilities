@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import FloatingLabel from '../../components/FloatingLabel'
-import ErrorMessage from '../../components/ErrorMessage'
+import FloatingLabel from '../../components/FloatingLabel';
+import ErrorMessage from '../../components/ErrorMessage';
 
 class Signup {
   #email = '';
@@ -15,12 +15,11 @@ class Signup {
   #error = { };
 
   constructor () {
-    this.#componentMount();
     this.#root.innerHTML = this.#render();
+    this.#componentMount();
   }
 
   #componentMount = () => {
-    window.onload = () => {
       const emailInput = document.getElementById(this.#emailId);
       const passwordInput = document.getElementById(this.#passwordId);
       const passwordRepeatInput = document.getElementById(this.#passwordRepeatId);
@@ -58,7 +57,8 @@ class Signup {
 
         createUserWithEmailAndPassword(auth, this.#email, this.#password)
         .then(() => {
-          location.replace('/news-and-messages');
+          history.pushState({ path: '' }, '', `/`);
+          location.replace(`/`);
         })
         .catch((error) => {
           this.#error = error;
@@ -66,7 +66,6 @@ class Signup {
           this.#root.innerHTML = this.#render();
         });
       });
-    };
   }
 
   #render = () => {
@@ -84,7 +83,7 @@ class Signup {
             
             <a href="/login" class="link-info">I have account</a>
             
-            ${this.#error?.code && ErrorMessage(this.#error)}
+            ${this.#error?.code ? ErrorMessage(this.#error) : ''}
           </div>
         </div>
       </div>
