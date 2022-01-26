@@ -15,6 +15,7 @@ import Contacts from './app/pages/Contacts';
 import ContentAdding from './app/pages/ContentAdding';
 import Home from './app/pages/Home';
 import Page404 from './app/pages/Page404';
+import Login from './app/pages/Login';
 //import { initializeApp } from 'firebase/app'
 //import { FIREBASE_CONFIG } from './app/constants/firebase'
 //import { getAuth, onAuthStateChanged } from 'firebase/auth'
@@ -73,7 +74,7 @@ class App {
             Component = Home;
         }
 
-        if (isLocationInputEventFired && !isInputLocationExisting) {
+      /* if (isLocationInputEventFired && !isInputLocationExisting) {
             this.#root.innerHTML = Page404();
 
             history.replaceState(
@@ -92,7 +93,12 @@ class App {
                 ? currentPath.split(' ').join('-')
                 : ''}`
             );
-        }
+        }   */
+
+          new Login();
+       // this.#root.innerHTML = AmountOfConsumed();
+
+
     }
 }
 
