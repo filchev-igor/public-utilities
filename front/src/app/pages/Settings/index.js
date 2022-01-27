@@ -6,7 +6,7 @@ const Settings = () => {
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col col-sm-3">
+            <div class="col col-sm-12 col-md-8 mx-auto">
               <p>Your data</p>
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="firstName" placeholder="Name" autocomplete="off">
