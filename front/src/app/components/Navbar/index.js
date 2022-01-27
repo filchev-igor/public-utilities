@@ -13,7 +13,7 @@ import useLightMode from '../../utils/useLightMode';
 const Navbar = async () => {
     const linksId = [];
 
-    const { sethasDayMode } = await useLightMode();
+    const { hasDayMode, setHasDayMode } = await useLightMode();
 
     const lightModeButtonId = uuidv4();
     const darkModeButtonId = uuidv4();
@@ -36,9 +36,10 @@ const Navbar = async () => {
             const page = value[0].toUpperCase() + value.slice(1);
 
             return (`
-            <li class="nav-item">
-                <a class="nav-link" id=${id} href="${link}">${page}</a>
-            </li>`);
+              <li class="nav-item">
+                  <a class="nav-link" id=${id} href="${link}">${page}</a>
+              </li>
+            `);
         })
         .join('');
 
@@ -69,17 +70,17 @@ const Navbar = async () => {
         const darkModeButton = document.getElementById(darkModeButtonId);
 
         if (lightModeButton) {
-            lightModeButton.addEventListener('click', sethasDayMode());
+            lightModeButton.addEventListener('click', setHasDayMode());
         }
 
         if (darkModeButton)
-            darkModeButton.addEventListener('click', sethasDayMode(false));
+            darkModeButton.addEventListener('click', setHasDayMode(false));
     }, 100);
 
     return (`
-        <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky">
-          <div class="container-fluid" style=">
-            <a href="/">
+        <nav class="navbar navbar-expand-lg position-sticky ${!hasDayMode ? 'navbar-dark navbar-grey' : 'navbar-light bg-light'}">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">
                 <img class="rounded logo" src=${logo} alt="company logo">
             </a>
 
@@ -91,35 +92,18 @@ const Navbar = async () => {
               <ul class="navbar-nav">
                 ${links}
               </ul>
-              
-              <button type="button" class="btn btn-dark" id="${lightModeButtonId}">
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-dark" id="${lightModeButtonId}">
             <i class="material-icons-outlined">light_mode</i>
           </button>
-              
+
           <button type="button" class="btn btn-dark" id="${darkModeButtonId}">
             <i class="material-icons-outlined">dark_mode</i>
           </button>
-            </div>
-          </div>
           
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Language
-            </button>
-            
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a class="dropdown-item" href="#">LT</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">EN</a>
-              </li>
-            </ul>
-          </div>
-          
-          
-          
-          ${user ? LogOutButton() : ''}
+           ${user ? await LogOutButton() : ''}
         </nav>
     `);
 };

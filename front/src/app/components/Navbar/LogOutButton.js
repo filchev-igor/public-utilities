@@ -1,30 +1,30 @@
-import { getAuth, signOut } from 'firebase/auth'
-import { LOG_OUT_BUTTON } from '../../constants/navbar'
-import { v4 as uuidv4 } from 'uuid'
+import { getAuth, signOut } from 'firebase/auth';
+import { LOG_OUT_BUTTON } from '../../constants/navbar';
+import { v4 as uuidv4 } from 'uuid';
 
-const LogOutButton = () => {
-  const auth = getAuth();
-  const logOutButtonId = uuidv4();
+const LogOutButton = async () => {
+    const auth = getAuth();
+    const logOutButtonId = uuidv4();
 
-  const handleLogout = () => {
-      signOut(auth).then(() => {
-        history.pushState({ path: 'login' }, '', `/login`);
-        location.replace(`/login`);
-      });
-  };
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            history.pushState({ path: 'login' }, '', `/login`);
+            location.replace(`/login`);
+        });
+    };
 
-  setTimeout(() => {
-    const logOutButton = document.getElementById(logOutButtonId);
+    setTimeout(() => {
+        const logOutButton = document.getElementById(logOutButtonId);
 
-    if (logOutButton)
-      logOutButton.addEventListener('click', handleLogout);
-  }, 1000);
+        if (logOutButton)
+            logOutButton.addEventListener('click', handleLogout);
+    }, 1000);
 
-  return (`
-    <button class="btn btn-outline-danger" id=${logOutButtonId} type="button">
+    return (`
+      <button type="button" class="btn btn-outline-danger" id=${logOutButtonId}>
         ${LOG_OUT_BUTTON}
-    </button>
-  `);
+      </button>
+    `);
 };
 
 export default LogOutButton;

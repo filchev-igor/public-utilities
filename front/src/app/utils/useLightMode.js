@@ -6,13 +6,13 @@ const useLightMode = async () => {
 
     const hasDayMode = await getDataByKey(key, true);
 
-    const sethasDayMode = (isLightModeSelected = true) => async () => {
+    const setHasDayMode = (isLightModeSelected = true) => async () => {
         await setDataByKey(isLightModeSelected, key);
 
         new App(true);
     };
 
-    return {hasDayMode, sethasDayMode};
+    return {hasDayMode, setHasDayMode};
 
 };
 
