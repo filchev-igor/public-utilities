@@ -3,14 +3,34 @@ module.exports = {
         "browser": true,
         "es2021": true,
         "amd": true,
-        "node": true
+        "node": true,
     },
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
     },
     "rules": {
-        "semi": [2, "always"],
-    }
+        "indent": "warn",
+        "keyword-spacing": "warn",
+        "comma-dangle": ["warn", "always-multiline"],
+        //"max-len": ["error", { "code": 120, "tabWidth": 2 }],
+        "arrow-body-style": ["off"],
+        "new-cap": "off",
+        "no-param-reassign": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-quotes": ["warn", "prefer-single"],
+        "no-use-before-define": ["error", { "functions": false }],
+        "no-plusplus": "off",
+        "quote-props": "off",
+        "space-before-function-paren": "off",
+        "linebreak-style": "off",
+        "global-require": "off",
+        "semi": "warn",
+        "no-multiple-empty-lines": ["warn", { "max": 1 }],
+        "no-unused-expressions": [ "error", { "allowTaggedTemplates": true } ],
+        "spaced-comment": "off",
+        "import/prefer-default-export": "off",
+        "arrow-parens": ["warn", "as-needed", { "requireForBlockBody": true }],
+    },
 };

@@ -1,8 +1,8 @@
 import Navbar from '../../components/Navbar';
 
-const AmountOfConsumed = () => {
+const AmountOfConsumed = async () => {
     return (`
-        ${Navbar()}
+        ${await Navbar()}
     
         #Insert table here (For current month and previous ones)
         
