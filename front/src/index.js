@@ -72,7 +72,7 @@ class App {
         else {
             if (locationPath === SIGN_UP) {
                 new Signup();
-
+              
                 return;
             }
             else {

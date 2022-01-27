@@ -20,8 +20,17 @@ const LogOutButton = () => {
       logOutButton.addEventListener('click', handleLogout);
   }, 1000);
 
-  return (`
-    <button class="btn btn-outline-danger" id=${logOutButtonId} type="button">
+    const isDarkMode = false;
+    return isDarkMode ?
+
+    (`
+    <button class="butn" id=${logOutButtonId} type="button">
+        ${LOG_OUT_BUTTON}
+    </button>
+  `)
+        :
+(`
+    <button class="butn" id=${logOutButtonId} type="button">
         ${LOG_OUT_BUTTON}
     </button>
   `);
