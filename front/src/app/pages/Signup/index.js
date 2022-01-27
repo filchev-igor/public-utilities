@@ -1,5 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+} from 'firebase/auth';
 import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
 import {doc, setDoc} from "firebase/firestore";
@@ -60,6 +64,8 @@ class Signup {
 
             createUserWithEmailAndPassword(auth, this.#email, this.#password)
                 .then(async (userCredential) => {
+                    await sendEmailVerification(userCredential.user);
+
                     try {
                         const obj = {
                             role: ROLES.USER,
@@ -67,10 +73,31 @@ class Signup {
                                 first: "",
                                 last: "",
                             },
-                            creationTime: new Date(),
-                            publishedPosts: 0,
-                            hasDraft: false,
+                            addressesNumber: 0,
+                            dates: {
+                                created: new Date(),
+                            },
                         };
+                        /*
+                        userId,
+                          addresses: {
+                            country: "Lithuania",
+                              city: "Vilnius",
+                              isCity: true,
+                              street: '',
+                              number: '',
+                              postIndex: '',
+                        }, */
+                        /*
+                        services: {
+                          hasMaintenanceServices: false,
+                          Cleaning of the communal areas
+                          Electricity of the communal areas
+                          Maintenance of the heating system and hot water supply system
+                          Contribution to the fund of renovation
+                          Maintanance of the intercom
+                          Householders association's properties administration
+                        },*/
 
                         const db = getFirestore();
 
@@ -99,11 +126,11 @@ class Signup {
           <div class="container-fluid usual-pages background">
             <div class="row vh-100">
               <div class="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
-                ${FloatingLabel(['email', 'Email', this.#email, this.#emailId])}
+                ${FloatingLabel(['email', 'Email', this.#email, this.#emailId, true])}
                 
-                ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId])}
+                ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId, true])}
                 
-                ${FloatingLabel(['password', 'Repeat password', this.#passwordRepeat, this.#passwordRepeatId])}
+                ${FloatingLabel(['password', 'Repeat password', this.#passwordRepeat, this.#passwordRepeatId, true])}
                 
                 <button type="button" id=${this.#signupButtonId} class="btn btn-outline-light">Sign up</button>
                 

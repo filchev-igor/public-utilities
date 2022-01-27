@@ -43,8 +43,6 @@ const Navbar = async () => {
 
     const links = pages
         .map((value) => {
-            console.log(value);
-
             const link = (value !== NEWS_AND_MESSAGES_EN && value !== NEWS_AND_MESSAGES_LT)
                 ? value.split(' ').join('-')
                 : '/';
@@ -92,8 +90,11 @@ const Navbar = async () => {
         const lightModeButton = document.getElementById(lightModeButtonId);
         const darkModeButton = document.getElementById(darkModeButtonId);
 
-        lithuanianButton.onclick = setIsLithuanian();
-        englishButton.onclick = setIsLithuanian(false);
+        if (lithuanianButton)
+            lithuanianButton.onclick = setIsLithuanian();
+
+        if (englishButton)
+            englishButton.onclick = setIsLithuanian(false);
 
         if (lightModeButton) {
             lightModeButton.addEventListener('click', setHasDayMode());
