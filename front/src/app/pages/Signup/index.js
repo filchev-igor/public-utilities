@@ -87,7 +87,7 @@ class Signup {
           </div>
         </div>
       </div>
-    `);
+        `);
     };
 }
 

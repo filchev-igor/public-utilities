@@ -8,6 +8,7 @@ import logo from "../../../../favicon.png";
 import "../../../../css/index.scss";
 import useAuth from '../../utils/useAuth';
 import LogOutButton from './LogOutButton';
+import "./NavbarStyle.scss";
 import useLightMode from '../../utils/useLightMode';
 
 const Navbar = async () => {
@@ -36,9 +37,10 @@ const Navbar = async () => {
             const page = value[0].toUpperCase() + value.slice(1);
 
             return (`
-            <li class="nav-item">
-                <a class="nav-link" id=${id} href="${link}">${page}</a>
-            </li>`);
+              <li class="nav-item">
+                  <a class="nav-link" id=${id} href="${link}">${page}</a>
+              </li>
+            `);
         })
         .join('');
 
@@ -64,21 +66,24 @@ const Navbar = async () => {
         }
     };
 
-    setTimeout(() => {
-        const lightModeButton = document.getElementById(lightModeButtonId);
-        const darkModeButton = document.getElementById(darkModeButtonId);
+  setTimeout(() => {
+    const lightModeButton = document.getElementById(lightModeButtonId);
+    const darkModeButton = document.getElementById(darkModeButtonId);
 
-        if (lightModeButton) {
-            lightModeButton.addEventListener('click', sethasDayMode());
-        }
+    if (lightModeButton) {
+      lightModeButton.addEventListener('click', sethasDayMode());
+    }
 
-        if (darkModeButton)
-            darkModeButton.addEventListener('click', sethasDayMode(false));
-    }, 100);
+    if (darkModeButton)
+      darkModeButton.addEventListener('click', sethasDayMode(false));
+  }, 100);
 
-    return (`
-        <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky">
-          <div class="container-fluid" style=">
+    const isDarkMode = false;
+    return isDarkMode ?
+
+        (`
+        <nav class="navbar dark navbar-expand-lg navbar-light bg-light position-sticky">
+          <div class="container-fluid">
             <a href="/">
                 <img class="rounded logo" src=${logo} alt="company logo">
             </a>
@@ -102,24 +107,32 @@ const Navbar = async () => {
             </div>
           </div>
           
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Language
-            </button>
-            
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li>
-                <a class="dropdown-item" href="#">LT</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">EN</a>
-              </li>
-            </ul>
-          </div>
-          
-          
+   
           
           ${user ? LogOutButton() : ''}
+        </nav>
+    `)
+
+        :
+
+        (`
+        <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img class="rounded logo" src=${logo} alt="company logo">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                ${links}
+              </ul>
+            </div>
+          </div>
+
+            ${user ? LogOutButton() : ''}
         </nav>
     `);
 };

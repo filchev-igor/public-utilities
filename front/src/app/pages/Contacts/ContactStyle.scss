@@ -1,0 +1,92 @@
+﻿butn {
+    color: black;
+    background-color: #e16f6f;
+    border-color: #e14444;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    float: right;
+    margin-right: 5px;
+    width: 100px;
+}
+
+.butn:hover {
+    transform: scale(1.1);
+    background-color: #e16f6f;
+    border-color: #e14444;
+}
+.background {
+    background-color: #b1b1b1;
+    height: 880px;
+}
+.maps{
+    position:absolute;
+    width:100%;
+    height: auto;
+}
+.line {
+    position: absolute;
+    top: 55.5%;
+    background-color: grey;
+    height: 3px;
+    width: 100%;
+}
+.line2{
+    position:relative;
+    background-color: grey;
+    height: 430px;
+    width: 3px;
+    left: 50%;
+    top:150px;
+}
+.line3 {
+    position: absolute;
+    background-color: grey;
+    width: 400px;
+    height: 3px;
+    top: 620px;
+    left: 280px;
+}
+.line4 {
+    position: absolute;
+    background-color: grey;
+    width: 240px;
+    height: 3px;
+    top: 620px;
+    left: 1265px;
+}
+.line5 {
+    position: absolute;
+    background-color: grey;
+    width: 240px;
+    height: 3px;
+    top: 800px;
+    left: 1265px;
+}
+.info{
+    position: relative;
+    width: 900px;
+    height: 300px;
+    top: 200px;
+}
+.info2{
+    position: relative;
+    width: 600px;
+    height: 300px;
+    top: 330px;
+    left: 1150px;
+}
+.submit {
+    position: relative;
+    top: 80px;
+    left: 320px;
+    width: 100px;
+    height: 40px;
+    background-color: green;
+    border-color: green;
+    border-radius: 6px;
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+.submit:hover{
+    transform: scale(1.1);
+}

@@ -1,0 +1,35 @@
+﻿.butn {
+    color: black;
+    background-color: #e16f6f;
+    border-color: #e14444;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    float: right;
+    margin-right: 5px;
+    width: 100px;
+}
+
+.butn:hover {
+        transform: scale(1.1);
+        background-color: #e16f6f;
+        border-color: #e14444;
+}
+
+.irasyti {
+    background-color: green;
+    border-radius: 6px;
+    border-color: green;
+    color: white;
+    top: 10%;
+    right: 15%;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+}
+
+.irasyti:hover{
+    transform: scale(1.1);
+}
+.background {
+    background-color: #b1b1b1;
+    height: 880px;
+}
