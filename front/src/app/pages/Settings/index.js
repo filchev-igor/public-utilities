@@ -6,7 +6,7 @@ const Settings = () => {
     
     <div class="container-fluid">
         <div class="row">
-            <div class="col s12 m10 l10">
+            <div class="col">
               <p>Your data</p>
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="firstName" placeholder="Name" autocomplete="off">
@@ -72,22 +72,37 @@ const Settings = () => {
                 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="electricity">
-                  <label class="form-check-label" for="electricity">Electricity</label>
+                  <label class="form-check-label" for="electricity">Maintenance services</label>
                 </div>
                 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="water">
-                  <label class="form-check-label" for="water">Water and central heating during winter period</label>
+                  <label class="form-check-label" for="water">Cleaning of the communal areas</label>
                 </div>
                 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="rubbish">
-                  <label class="form-check-label" for="rubbish">Rubbish</label>
+                  <label class="form-check-label" for="rubbish">Electricity of the communal areas</label>
                 </div>
                 
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="gas">
-                  <label class="form-check-label" for="gas">Gas</label>
+                  <label class="form-check-label" for="gas">Maintenance of the heating system and hot water supply system </label>
+                </div>
+                
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="gas">
+                  <label class="form-check-label" for="gas">Contribution to the fund of renovation </label>
+                </div>
+                
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="gas">
+                  <label class="form-check-label" for="gas">Maintanance of the intercom</label>
+                </div>
+                
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="gas">
+                  <label class="form-check-label" for="gas">Householders association's properties administration</label>
                 </div>
                 
                 <button type="button" class="btn btn-success">Add new address</button>               
