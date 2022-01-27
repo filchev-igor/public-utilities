@@ -4,8 +4,8 @@ import {
     USUAL_PAGES,
 } from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
-import logo from "../../../../favicon.png";
-import "../../../../css/index.scss";
+import logo from '../../../../favicon.png';
+import '../../../../css/index.scss';
 import useAuth from '../../utils/useAuth';
 import LogOutButton from './LogOutButton';
 import useLightMode from '../../utils/useLightMode';
@@ -17,6 +17,8 @@ const Navbar = async () => {
 
     const lightModeButtonId = uuidv4();
     const darkModeButtonId = uuidv4();
+
+    const navbarId = uuidv4();
 
     const { isInitializing, user } = useAuth(true);
 
@@ -77,6 +79,16 @@ const Navbar = async () => {
             darkModeButton.addEventListener('click', setHasDayMode(false));
     }, 100);
 
+    setTimeout(() => {
+        const navbarCollapseButton = document.querySelectorAll(`[data-id='${navbarId}']`);
+
+        navbarCollapseButton[0].onclick = () => {
+            const collapseElement = document.getElementById(navbarId);
+
+            collapseElement.classList.toggle('show');
+        };
+    }, 100);
+
     return (`
         <nav class="navbar navbar-expand-lg position-sticky ${!hasDayMode ? 'navbar-dark navbar-grey' : 'navbar-light bg-light'}">
           <div class="container-fluid">
@@ -84,11 +96,11 @@ const Navbar = async () => {
                 <img class="rounded logo" src=${logo} alt="company logo">
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-id="${navbarId}">
               <span class="navbar-toggler-icon"></span>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse" id="${navbarId}">
               <ul class="navbar-nav">
                 ${links}
               </ul>
