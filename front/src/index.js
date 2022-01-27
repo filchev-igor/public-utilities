@@ -16,7 +16,9 @@ import ContentAdding from './app/pages/ContentAdding';
 import Home from './app/pages/Home';
 import Page404 from './app/pages/Page404';
 import Login from './app/pages/Login';
-//import { initializeApp } from 'firebase/app'
+import { FIREBASE_CONFIG } from './app/constants/firebase'
+import { initializeApp } from 'firebase/app'
+import Signup from './app/pages/Signup'
 //import { FIREBASE_CONFIG } from './app/constants/firebase'
 //import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -95,14 +97,14 @@ class App {
             );
         }   */
 
-          new Login();
+          new Signup();
        // this.#root.innerHTML = AmountOfConsumed();
 
 
     }
 }
 
-//initializeApp(FIREBASE_CONFIG);
+initializeApp(FIREBASE_CONFIG);
 
 const app = new App();
 app.render();

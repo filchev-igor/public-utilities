@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
-import './style.scss';
 
 class Login {
   #email = '';
@@ -60,23 +59,18 @@ class Login {
 
   #render = () => {
       return (`
-      <div class=" background container-fluid">
-        <i class="ml-5 fas fa-tint "></i>
-        <i class="fas fa-faucet ml-5px"></i>
-        <div class="row">
-
-          <div class="login text-center">
-
-
+      <div class="container-fluid usual-pages background container-fluid">
+        <div class="row vh-100">
+          <div class="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
             ${FloatingLabel(['email', 'Email', this.#email, this.#emailId])}
             
             ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId])}
             
-            <button type="button" id=${this.#loginButtonId} class=" loginButton btn btn-outline-primary">Log in</button>
-            <div class="prisijungti">
-            <a href="/sign-up" class="link-info">Create new user</a>
+            <button type="button" id=${this.#loginButtonId} class="btn btn-outline-light">Log in</button>
             
-            ${this.#error?.code && ErrorMessage(this.#error)}
+            <a href="/sign-up" class="link-info d-block">Create new user</a>
+            
+            ${this.#error?.code ? ErrorMessage(this.#error) : ''}
           </div>
         </div>
       </div>

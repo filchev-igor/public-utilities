@@ -9,6 +9,3 @@ dist
 
 #Env files
 .env
-
-#VisualStudio
-.vs

@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import FloatingLabel from '../../components/FloatingLabel'
-import ErrorMessage from '../../components/ErrorMessage'
+import FloatingLabel from '../../components/FloatingLabel';
+import ErrorMessage from '../../components/ErrorMessage';
 
 class Signup {
   #email = '';
@@ -71,20 +71,20 @@ class Signup {
 
   #render = () => {
     return (`
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12 col-md-6 mx-auto text-center">
+      <div class="container-fluid usual-pages background">
+        <div class="row vh-100">
+          <div class="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
             ${FloatingLabel(['email', 'Email', this.#email, this.#emailId])}
             
             ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId])}
             
             ${FloatingLabel(['password', 'Repeat password', this.#passwordRepeat, this.#passwordRepeatId])}
             
-            <button type="button" id=${this.#signupButtonId} class="btn btn-outline-primary">Sign up</button>
+            <button type="button" id=${this.#signupButtonId} class="btn btn-outline-light">Sign up</button>
             
-            <a href="/login" class="link-info">I have account</a>
+            <a href="/login" class="link-info d-block">I have account</a>
             
-            ${this.#error?.code && ErrorMessage(this.#error)}
+            ${this.#error?.code ? ErrorMessage(this.#error) : ''}
           </div>
         </div>
       </div>
