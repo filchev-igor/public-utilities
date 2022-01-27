@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
 
@@ -10,51 +10,50 @@ class Login {
   #passwordId = uuidv4();
   #loginButtonId = uuidv4();
   #root = document.getElementById('root');
-  #error = { };
+  #error = {};
 
   constructor () {
-    this.#componentMount();
     this.#root.innerHTML = this.#render();
+    this.#componentMount();
   }
 
   #componentMount = () => {
-    window.onload = () => {
-      const emailInput = document.getElementById(this.#emailId);
-      const passwordInput = document.getElementById(this.#passwordId);
+      const emailInput = document.getElementById(this.#emailId)
+      const passwordInput = document.getElementById(this.#passwordId)
 
-      const loginButton = document.getElementById(this.#loginButtonId);
+      const loginButton = document.getElementById(this.#loginButtonId)
 
-      const auth = getAuth();
+      const auth = getAuth()
 
       emailInput.addEventListener('input', (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        this.#email = e.target.value;
-      });
+        this.#email = e.target.value
+      })
 
       passwordInput.addEventListener('input', (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        this.#password = e.target.value;
-      });
+        this.#password = e.target.value
+      })
 
       loginButton.addEventListener('click', (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         if (!this.#email.length || !this.#password.length)
-          return;
+          return
 
-        signInWithEmailAndPassword(auth, this.#email, this.#password)
-        .then(() => {
-          location.replace('/news-and-messages');
-        })
-        .catch((error) => {
-          this.#error = error;
+        signInWithEmailAndPassword(auth, this.#email, this.#password).
+          then(() => {
+            history.pushState({ path: '' }, '', `/`);
+            location.replace(`/`);
+          }).
+          catch((error) => {
+            this.#error = error
 
-          this.#root.innerHTML = this.#render();
-        });
-      });
-    };
+            this.#root.innerHTML = this.#render()
+          })
+      })
   }
 
   #render = () => {
@@ -75,7 +74,7 @@ class Login {
         </div>
       </div>
     `);
-  }
+  };
 }
 
 export default Login;
