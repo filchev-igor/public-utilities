@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import FloatingLabel from '../../components/FloatingLabel'
-import ErrorMessage from '../../components/ErrorMessage'
+import FloatingLabel from '../../components/FloatingLabel';
+import ErrorMessage from '../../components/ErrorMessage';
+import './style.scss';
 
 class Login {
   #email = '';
@@ -58,16 +59,21 @@ class Login {
   }
 
   #render = () => {
-    return (`
-      <div class="container-fluid">
+      return (`
+      <div class=" background container-fluid">
+        <i class="ml-5 fas fa-tint "></i>
+        <i class="fas fa-faucet ml-5px"></i>
         <div class="row">
-          <div class="col-12 col-md-6 mx-auto text-center">
+
+          <div class="login text-center">
+
+
             ${FloatingLabel(['email', 'Email', this.#email, this.#emailId])}
             
             ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId])}
             
-            <button type="button" id=${this.#loginButtonId} class="btn btn-outline-primary">Log in</button>
-            
+            <button type="button" id=${this.#loginButtonId} class=" loginButton btn btn-outline-primary">Log in</button>
+            <div class="prisijungti">
             <a href="/sign-up" class="link-info">Create new user</a>
             
             ${this.#error?.code && ErrorMessage(this.#error)}

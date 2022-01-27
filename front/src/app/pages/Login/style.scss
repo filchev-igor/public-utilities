@@ -1,0 +1,51 @@
+﻿.background {
+   
+    background-color: #2b429e;
+}
+
+.login {
+    width: 400px;
+    height: 300px;
+    padding: 50px;
+    margin-left: 725px;
+    margin-top: 300px;
+    background-color: #546fdc;
+    border-radius: 10px;
+}
+
+.row {
+   height: 1000px;
+   width: 1325px;
+}
+
+.loginButton {
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.loginButton:hover {
+    transform: scale(1.1);
+    background-color: white;
+    color: #4173c4;
+}
+
+.usernameButton{
+    border: none;
+}
+.prisijungti{
+  
+}
+
+
+.fas {
+   // margin-left: 1060px;
+   // margin-top: 200px;
+   // position: absolute;
+   // transform: scaleX(-1);
+}
+
+i {
+
+    color: white;
+    font-size: 100px;
+}
