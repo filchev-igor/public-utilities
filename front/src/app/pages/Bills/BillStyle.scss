@@ -1,0 +1,74 @@
+﻿.butn {
+    color: black;
+    background-color: #e16f6f;
+    border-color: #e14444;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    float: right;
+    margin-right: 5px;
+    width: 100px;
+}
+.butn:hover {
+    transform: scale(1.1);
+    background-color: #e16f6f;
+    border-color: #e14444;
+}
+.btn {
+    color: black;
+    background-color: #979797;
+    border-color: #979797;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    float: right;
+    margin-right: 5px;
+    width: 100px;
+}
+.btn:hover {
+    transform: scale(1.1);
+    background-color: #979797;
+    border-color: #979797;
+    color: black;
+}
+.btn.dark {
+    color: black;
+    background-color: #acacac;
+    border-color: black;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    float: right;
+    width: 100px;
+    margin-right: 6px;
+}
+
+.btn.dark:hover {
+    transform: scale(1.1);
+    background-color: #acacac;
+    border-color: black;
+}
+.button {
+    color: white;
+    background-color: grey;
+    border-color: grey;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    width: 80px;
+}
+.button:hover {
+    transform: scale(1.1);
+    background-color: grey;
+    border-color: grey;
+}
+.card.dark {
+    background-color: #6e6e6e;
+    border-radius: 0px;
+    height: 880px;
+}
+.card-header.dark {
+    background-color: #6e6e6e;
+}
+.list-group-item.dark {
+    background-color: #6e6e6e;
+}
+.collapse.dark {
+    background-color: #6e6e6e;
+}

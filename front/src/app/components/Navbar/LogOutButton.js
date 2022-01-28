@@ -1,6 +1,7 @@
 import { getAuth, signOut } from 'firebase/auth'
 import { LOG_OUT_BUTTON } from '../../constants/navbar'
 import { v4 as uuidv4 } from 'uuid'
+import "./NavbarStyle.scss";
 
 const LogOutButton = () => {
   const auth = getAuth();
@@ -20,8 +21,17 @@ const LogOutButton = () => {
       logOutButton.addEventListener('click', handleLogout);
   }, 1000);
 
-  return (`
-    <button class="btn btn-outline-danger" id=${logOutButtonId} type="button">
+    const isDarkMode = true;
+    return isDarkMode ?
+
+        (`
+    <button class="butn" id=${logOutButtonId} type="button">
+        ${LOG_OUT_BUTTON}
+    </button>
+  `)
+        :
+(`
+    <button class="butn" id=${logOutButtonId} type="button">
         ${LOG_OUT_BUTTON}
     </button>
   `);

@@ -25,4 +25,4 @@ export const AUTHORIZED_PAGES = [
   CONTENT_ADDING,
 ];
 
-export const LOG_OUT_BUTTON = 'log out';
+export const LOG_OUT_BUTTON = 'Log out';
