@@ -8,21 +8,21 @@ export const LOGIN = "login";
 export const SIGN_UP = "sign up";
 
 export const USUAL_PAGES = [
-  LOGIN,
-  SIGN_UP,
+    LOGIN,
+    SIGN_UP,
 ];
 
 export const AUTHENTICATED_PAGES = [
-  NEWS_AND_MESSAGES,
-  BILLS,
-  AMOUNTS_OF_CONSUMED,
-  CONTACTS,
-  SETTINGS,
+    NEWS_AND_MESSAGES,
+    BILLS,
+    AMOUNTS_OF_CONSUMED,
+    CONTACTS,
+    SETTINGS,
 ];
 
 export const AUTHORIZED_PAGES = [
-  ...AUTHENTICATED_PAGES,
-  CONTENT_ADDING,
+    ...AUTHENTICATED_PAGES,
+    CONTENT_ADDING,
 ];
 
 export const LOG_OUT_BUTTON = 'log out';

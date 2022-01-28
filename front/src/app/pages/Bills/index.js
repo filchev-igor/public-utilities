@@ -1,9 +1,9 @@
 //import {getBillsType} from "../../api/example.js";
 import Navbar from '../../components/Navbar';
 
-const Bills = () => {
+const Bills = async () => {
     return (`
-        ${Navbar()}
+        ${await Navbar()}
         
         <div class="container-fluid">
             <div class="row">

@@ -1,30 +1,30 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import App from '../../index'
+import App from '../../index';
 
 const useAuth = (isAuthInitialized) => {
-  const getAuthState = () => {
-    const user = auth.currentUser;
+    const auth = getAuth();
 
-    return {
-      isInitializing: !user,
-      user
+    const getAuthState = () => {
+        const user = auth.currentUser;
+
+        return {
+            isInitializing: !user,
+            user,
+        };
     };
-  };
 
-  const auth = getAuth();
-  const state = getAuthState();
+    const state = getAuthState();
 
-  if (!isAuthInitialized) {
-    onAuthStateChanged(auth, user => {
+    if (!isAuthInitialized) {
+        onAuthStateChanged(auth, (user) => {
+            state.isInitializing = false;
+            state.user = user;
 
-      state.isInitializing = false;
-      state.user = user;
+            new App(true);
+        });
+    }
 
-      new App(true);
-    });
-  }
-
-  return state;
+    return state;
 };
 
 export default useAuth;

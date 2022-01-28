@@ -4,60 +4,60 @@ import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
 
 class Login {
-  #email = '';
-  #password = '';
-  #emailId = uuidv4();
-  #passwordId = uuidv4();
-  #loginButtonId = uuidv4();
-  #root = document.getElementById('root');
-  #error = {};
+    #email = '';
+    #password = '';
+    #emailId = uuidv4();
+    #passwordId = uuidv4();
+    #loginButtonId = uuidv4();
+    #root = document.getElementById('root');
+    #error = {};
 
-  constructor () {
-    this.#root.innerHTML = this.#render();
-    this.#componentMount();
-  }
+    constructor () {
+        this.#root.innerHTML = this.#render();
+        this.#componentMount();
+    }
 
-  #componentMount = () => {
-      const emailInput = document.getElementById(this.#emailId)
-      const passwordInput = document.getElementById(this.#passwordId)
+    #componentMount = () => {
+        const emailInput = document.getElementById(this.#emailId);
+        const passwordInput = document.getElementById(this.#passwordId);
 
-      const loginButton = document.getElementById(this.#loginButtonId)
+        const loginButton = document.getElementById(this.#loginButtonId);
 
-      const auth = getAuth()
+        const auth = getAuth();
 
-      emailInput.addEventListener('input', (e) => {
-        e.preventDefault()
+        emailInput.addEventListener('input', (e) => {
+            e.preventDefault();
 
-        this.#email = e.target.value
-      })
+            this.#email = e.target.value;
+        });
 
-      passwordInput.addEventListener('input', (e) => {
-        e.preventDefault()
+        passwordInput.addEventListener('input', (e) => {
+            e.preventDefault();
 
-        this.#password = e.target.value
-      })
+            this.#password = e.target.value;
+        });
 
-      loginButton.addEventListener('click', (e) => {
-        e.preventDefault()
+        loginButton.addEventListener('click', (e) => {
+            e.preventDefault();
 
-        if (!this.#email.length || !this.#password.length)
-          return
+            if (!this.#email.length || !this.#password.length)
+                return;
 
-        signInWithEmailAndPassword(auth, this.#email, this.#password).
-          then(() => {
-            history.pushState({ path: '' }, '', `/`);
-            location.replace(`/`);
-          }).
-          catch((error) => {
-            this.#error = error
+            signInWithEmailAndPassword(auth, this.#email, this.#password).
+                then(() => {
+                    history.pushState({ path: '' }, '', `/`);
+                    location.replace(`/`);
+                }).
+                catch((error) => {
+                    this.#error = error;
 
-            this.#root.innerHTML = this.#render()
-          })
-      })
-  }
+                    this.#root.innerHTML = this.#render();
+                });
+        });
+    };
 
-  #render = () => {
-      return (`
+    #render = () => {
+        return (`      
       <div class="container-fluid usual-pages background container-fluid">
         <div class="row vh-100">
           <div class="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
@@ -74,7 +74,7 @@ class Login {
         </div>
       </div>
     `);
-  };
+    };
 }
 
 export default Login;

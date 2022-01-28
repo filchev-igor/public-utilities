@@ -12,6 +12,7 @@
     "file-loader": "^6.2.0",
     "firebase": "^9.6.4",
     "html-webpack-plugin": "^5.5.0",
+    "idb": "^7.0.0",
     "material-icons": "^1.10.6",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",

@@ -1,4 +1,5 @@
-import 'material-icons/iconfont/filled.css';
+import 'material-icons/iconfont/filled.scss';
+import 'material-icons/iconfont/outlined.scss';
 import "bootstrap/scss/bootstrap.scss";
 import AmountOfConsumed from "./app/pages/AmountOfConsumed";
 import {
@@ -11,7 +12,7 @@ import {
     NEWS_AND_MESSAGES,
     SETTINGS,
     SIGN_UP,
-} from './app/constants/navbar'
+} from './app/constants/navbar';
 import Bills from './app/pages/Bills';
 import Settings from './app/pages/Settings';
 import NewsAndMessages from './app/pages/NewsAndMessages';
@@ -34,7 +35,7 @@ class App {
         this.#render();
     }
 
-    #render = () => {
+    #render = async () => {
         let Component;
 
         const { isInitializing, user } = useAuth(this.#isAuthInitialized);
@@ -43,13 +44,13 @@ class App {
             return;
 
         const locationPath = location.pathname !== '/'
-          ? location.pathname
-          .split('/')[1]
-          .split('-')
-          .join(' ')
-          : NEWS_AND_MESSAGES;
+            ? location.pathname
+                .split('/')[1]
+                .split('-')
+                .join(' ')
+            : NEWS_AND_MESSAGES;
 
-        if (!!user) {
+        if (user) {
             const isLocationPathExisting = AUTHENTICATED_PAGES.includes(locationPath);
 
             if (locationPath === SETTINGS) {
@@ -65,7 +66,7 @@ class App {
             } else if (locationPath === NEWS_AND_MESSAGES) {
                 Component = NewsAndMessages;
             }
-            else if (!isLocationPathExisting && !locationPath.length ) {
+            else if (!isLocationPathExisting && locationPath.length) {
                 Component = Page404;
             }
         }
@@ -84,8 +85,8 @@ class App {
             }
         }
 
-        this.#root.innerHTML = Component();
-    }
+        this.#root.innerHTML = await Component();
+    };
 }
 
 initializeApp(FIREBASE_CONFIG);

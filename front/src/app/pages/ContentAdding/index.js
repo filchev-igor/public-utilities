@@ -1,15 +1,15 @@
 import Navbar from '../../components/Navbar';
 
-const ContentAdding = () => {
-  return (`
-    ${Navbar()}
-    
-    <div class="container-fluid">
-      <div class="row">
-        
+const ContentAdding = async () => {
+    return (`
+      ${await Navbar()}
+      
+      <div class="container-fluid">
+        <div class="row">
+          
+        </div>
       </div>
-    </div>
-  `);
+    `);
 };
 
 export default ContentAdding;

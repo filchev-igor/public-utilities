@@ -1,77 +1,104 @@
 import {
-  AUTHENTICATED_PAGES,
-  NEWS_AND_MESSAGES,
-  USUAL_PAGES,
+    AUTHENTICATED_PAGES,
+    NEWS_AND_MESSAGES,
+    USUAL_PAGES,
 } from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
 import logo from "../../../../favicon.png";
 import "../../../../css/index.scss";
 import useAuth from '../../utils/useAuth';
 import LogOutButton from './LogOutButton';
+import useLightMode from '../../utils/useLightMode';
 
-const Navbar = () => {
+const Navbar = async () => {
     const linksId = [];
+
+    const { sethasDayMode } = await useLightMode();
+
+    const lightModeButtonId = uuidv4();
+    const darkModeButtonId = uuidv4();
 
     const { isInitializing, user } = useAuth(true);
 
     if (isInitializing || !user)
-      return;
+        return;
 
     const links = (user ? AUTHENTICATED_PAGES : USUAL_PAGES)
-    .map(value => {
-        const link = value !== NEWS_AND_MESSAGES
-          ? value.split(' ').join('-')
-          : '/';
+        .map((value) => {
+            const link = value !== NEWS_AND_MESSAGES
+                ? value.split(' ').join('-')
+                : '/';
 
-        const id = uuidv4();
+            const id = uuidv4();
 
-        linksId.push(id);
+            linksId.push(id);
 
-        const page = value[0].toUpperCase() + value.slice(1);
+            const page = value[0].toUpperCase() + value.slice(1);
 
-        return (`
+            return (`
             <li class="nav-item">
                 <a class="nav-link" id=${id} href="${link}">${page}</a>
             </li>`);
-    })
-    .join('');
+        })
+        .join('');
 
     /*
     Link go event is being mocked here
      */
     window.onload = () => {
-      for (const id of linksId) {
-          const element = document.getElementById(id);
+        for (const id of linksId) {
+            const element = document.getElementById(id);
 
-          element.addEventListener('click', (e) => {
-            e.preventDefault();
+            element.addEventListener('click', (e) => {
+                e.preventDefault();
 
-            const path = element.href.split('/')[3];
+                const path = element.href.split('/')[3];
 
-            const obj = {
-              path: path,
-            };
+                const obj = {
+                    path: path,
+                };
 
-            history.pushState(obj, '', `/${path}`);
-            location.replace(`/${path}`);
-          });
-      }
+                history.pushState(obj, '', `/${path}`);
+                location.replace(`/${path}`);
+            });
+        }
     };
+
+    setTimeout(() => {
+        const lightModeButton = document.getElementById(lightModeButtonId);
+        const darkModeButton = document.getElementById(darkModeButtonId);
+
+        if (lightModeButton) {
+            lightModeButton.addEventListener('click', sethasDayMode());
+        }
+
+        if (darkModeButton)
+            darkModeButton.addEventListener('click', sethasDayMode(false));
+    }, 100);
 
     return (`
         <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/">
+          <div class="container-fluid" style=">
+            <a href="/">
                 <img class="rounded logo" src=${logo} alt="company logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 ${links}
               </ul>
+              
+              <button type="button" class="btn btn-dark" id="${lightModeButtonId}">
+            <i class="material-icons-outlined">light_mode</i>
+          </button>
+              
+          <button type="button" class="btn btn-dark" id="${darkModeButtonId}">
+            <i class="material-icons-outlined">dark_mode</i>
+          </button>
             </div>
           </div>
           
@@ -79,21 +106,18 @@ const Navbar = () => {
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Language
             </button>
+            
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">LT</a></li>
-              <li><a class="dropdown-item" href="#">EN</a></li>
+              <li>
+                <a class="dropdown-item" href="#">LT</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">EN</a>
+              </li>
             </ul>
           </div>
           
-          <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Mode
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Light</a></li>
-                  <li><a class="dropdown-item" href="#">Dark</a></li>
-              </ul>
-          </div>
+          
           
           ${user ? LogOutButton() : ''}
         </nav>
