@@ -1,19 +1,24 @@
 import {
-    AUTHENTICATED_PAGES,
-    NEWS_AND_MESSAGES,
-    USUAL_PAGES,
+    AUTHENTICATED_PAGES_EN, AUTHENTICATED_PAGES_LT,
+    NEWS_AND_MESSAGES_EN, NEWS_AND_MESSAGES_LT,
+    USUAL_PAGES_EN, USUAL_PAGES_LT,
 } from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
 import logo from '../../../../favicon.png';
 import '../../../../css/index.scss';
 import useAuth from '../../utils/useAuth';
 import LogOutButton from './LogOutButton';
-import useLightMode from '../../utils/useLightMode';
+import useDayMode from '../../utils/useDayMode';
+import useLithuanian from '../../utils/useLithuanian';
 
 const Navbar = async () => {
     const linksId = [];
 
-    const { hasDayMode, setHasDayMode } = await useLightMode();
+    const { hasDayMode, setHasDayMode } = await useDayMode();
+    const {isLithuanian, setIsLithuanian} = await useLithuanian();
+
+    const lithuanianButtonId = uuidv4();
+    const englishButtonId = uuidv4();
 
     const lightModeButtonId = uuidv4();
     const darkModeButtonId = uuidv4();
@@ -25,9 +30,22 @@ const Navbar = async () => {
     if (isInitializing || !user)
         return;
 
-    const links = (user ? AUTHENTICATED_PAGES : USUAL_PAGES)
+    const locationPath = location.pathname !== '/'
+        ? location.pathname
+            .split('/')[1]
+            .split('-')
+            .join(' ')
+        : NEWS_AND_MESSAGES_EN;
+
+    const authenticatedPages = isLithuanian ? AUTHENTICATED_PAGES_LT : AUTHENTICATED_PAGES_EN;
+    const usualPages = isLithuanian ? USUAL_PAGES_LT : USUAL_PAGES_EN;
+    const pages = user ? authenticatedPages : usualPages;
+
+    const links = pages
         .map((value) => {
-            const link = value !== NEWS_AND_MESSAGES
+            console.log(value);
+
+            const link = (value !== NEWS_AND_MESSAGES_EN && value !== NEWS_AND_MESSAGES_LT)
                 ? value.split(' ').join('-')
                 : '/';
 
@@ -39,7 +57,7 @@ const Navbar = async () => {
 
             return (`
               <li class="nav-item">
-                  <a class="nav-link" id=${id} href="${link}">${page}</a>
+                  <a class="nav-link ${value === decodeURI(locationPath) ? 'active' : ''}" id=${id} href="${link}">${page}</a>
               </li>
             `);
         })
@@ -68,8 +86,14 @@ const Navbar = async () => {
     };
 
     setTimeout(() => {
+        const lithuanianButton = document.getElementById(lithuanianButtonId);
+        const englishButton = document.getElementById(englishButtonId);
+
         const lightModeButton = document.getElementById(lightModeButtonId);
         const darkModeButton = document.getElementById(darkModeButtonId);
+
+        lithuanianButton.onclick = setIsLithuanian();
+        englishButton.onclick = setIsLithuanian(false);
 
         if (lightModeButton) {
             lightModeButton.addEventListener('click', setHasDayMode());
@@ -77,19 +101,16 @@ const Navbar = async () => {
 
         if (darkModeButton)
             darkModeButton.addEventListener('click', setHasDayMode(false));
-    }, 100);
 
-    setTimeout(() => {
         const navbarCollapseButton = document.querySelectorAll(`[data-id='${navbarId}']`);
 
-        if (!navbarCollapseButton[0])
-            return;
-        
-        navbarCollapseButton[0].onclick = () => {
-            const collapseElement = document.getElementById(navbarId);
+        if (navbarCollapseButton[0]) {
+            navbarCollapseButton[0].onclick = () => {
+                const collapseElement = document.getElementById(navbarId);
 
-            collapseElement.classList.toggle('show');
-        };
+                collapseElement.classList.toggle('show');
+            };
+        }
     }, 100);
 
     return (`
@@ -110,6 +131,14 @@ const Navbar = async () => {
             </div>
           </div>
 
+          <button type="button" class="btn btn-${isLithuanian ? '' : 'outline-'}dark" id="${lithuanianButtonId}">
+            LT
+          </button>
+          
+          <button type="button" class="btn btn-${!isLithuanian ? '' : 'outline-'}dark" id="${englishButtonId}">
+            EN
+          </button>
+          
           <button type="button" class="btn btn-dark" id="${lightModeButtonId}">
             <i class="material-icons-outlined">light_mode</i>
           </button>

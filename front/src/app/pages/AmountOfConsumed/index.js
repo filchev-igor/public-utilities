@@ -1,8 +1,8 @@
 import Navbar from '../../components/Navbar';
-import useLightMode from '../../utils/useLightMode';
+import useDayMode from '../../utils/useDayMode';
 
 const AmountOfConsumed = async () => {
-    const { hasDayMode } = await useLightMode();
+    const { hasDayMode } = await useDayMode();
 
     return (`
         ${await Navbar()}
