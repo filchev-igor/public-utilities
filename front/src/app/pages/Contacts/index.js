@@ -16,13 +16,64 @@ const Contacts = async () => {
               </div>
               
               <div class="col-12 cols-sm-10 col-md-6 my-4 mx-auto">
-                <div class="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center">
+                <div class="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100">
                   <div class="card-body">
-                    <h1> Kaip galime padeti?</h1>
-                    <h1> Kontaktai </h1>
-                    <h4>   Kalvariju g. 129-401</h4>
-                    <h4> (+370) 618 482 55</h4>
-                    <h4> Vilnius</h4><br>
+                    <h5 class="card-title">VšĮ "Public utilities"</h5>
+                    <p class="card-text">
+                      Kalvariju g. 129-401
+                    </p>
+                      
+                    <p class="card-text">
+                      <a href="tel:+370555555555555">+370555555555555</a>
+                    </p>
+                      
+                    <p class="card-text">                      
+                      <a href="mailto:info@public-utilities.lt">info@public-utilities.lt</a>
+                    </p>
+                  
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-12 cols-sm-10 col-md-6 my-4 mx-auto">
+                <div class="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Darbo laikas</h5>
+                      
+                    <p class="card-text">
+                      I-IV 8:00 – 12:00 12:30 – 16:45
+                    </p>
+                      
+                    <p class="card-text">                      
+                      V 08:00 – 12:00 12:30 – 15:30
+                    </p>
+                    
+                    <p class="card-text">                      
+                      VI – VII nedirbame
+                    </p>                  
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-12 cols-sm-10 col-md-6 my-4 mx-auto">
+                <div class="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">Įmonės kodas 301847774</h5>
+                    <p class="card-text">
+                      Registro Nr. 127597
+                    </p>
+                      
+                    <p class="card-text">
+                      Įreg. 2008 m. rugsėjo mėn. 04 d.
+                    </p>
+                      
+                    <p class="card-text">                      
+                      PVM mokėtojo kodas: LT104594286913
+                    </p>
+                    
+                    <p class="card-text">                      
+                      VĮ Registrų centro Kauno fil.
+                    </p>                  
                   </div>
                 </div>
               </div>
