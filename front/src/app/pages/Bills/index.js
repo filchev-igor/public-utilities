@@ -48,7 +48,7 @@ const Bills = async () => {
                         <div class="align-items-center d-flex justify-content-between">
                             January 2022
                             
-                            <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}"" type="button" data-toggle="collapse" data-id="collapseExample2">
+                            <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}"" type="button" data-toggle="bills" data-id="collapseExample2">
                                 More info
                             </a>
                         </div>
