@@ -1,7 +1,7 @@
-import useLightMode from '../../utils/useLightMode';
+import useDayMode from '../../utils/useDayMode';
 
 const Content = async () => {
-    const { hasDayMode } = await useLightMode();
+    const { hasDayMode } = await useDayMode();
 
     return (`
         <div class="container-fluid ${hasDayMode ? '' : 'bg-night-mode'} min-vh-100">

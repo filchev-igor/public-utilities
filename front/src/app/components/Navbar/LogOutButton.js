@@ -1,10 +1,13 @@
 import { getAuth, signOut } from 'firebase/auth';
-import { LOG_OUT_BUTTON } from '../../constants/navbar';
+import { LOG_OUT_BUTTON_EN, LOG_OUT_BUTTON_LT } from '../../constants/navbar';
 import { v4 as uuidv4 } from 'uuid';
+import useLithuanian from '../../utils/useLithuanian';
 
 const LogOutButton = async () => {
     const auth = getAuth();
     const logOutButtonId = uuidv4();
+
+    const {isLithuanian} = await useLithuanian();
 
     const handleLogout = () => {
         signOut(auth).then(() => {
@@ -21,8 +24,8 @@ const LogOutButton = async () => {
     }, 1000);
 
     return (`
-      <button type="button" class="btn btn-outline-danger" id=${logOutButtonId}>
-        ${LOG_OUT_BUTTON}
+      <button type="button" class="btn btn-outline-danger text-uppercase" id=${logOutButtonId}>
+        ${isLithuanian ? LOG_OUT_BUTTON_LT : LOG_OUT_BUTTON_EN}
       </button>
     `);
 };

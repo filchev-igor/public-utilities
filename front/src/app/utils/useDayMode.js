@@ -1,7 +1,7 @@
 import App from '../../index';
 import { getDataByKey, setDataByKey } from '../IndexedDb';
 
-const useLightMode = async () => {
+const useDayMode = async () => {
     const key = 'hasDayMode';
 
     const hasDayMode = await getDataByKey(key, true);
@@ -16,4 +16,4 @@ const useLightMode = async () => {
 
 };
 
-export default useLightMode;
+export default useDayMode;

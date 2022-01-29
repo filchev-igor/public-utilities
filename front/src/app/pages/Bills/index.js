@@ -1,9 +1,9 @@
 //import {getBillsType} from "../../api/example.js";
 import Navbar from '../../components/Navbar';
-import useLightMode from '../../utils/useLightMode';
+import useDayMode from '../../utils/useDayMode';
 
 const Bills = async () => {
-    const {hasDayMode} = await useLightMode();
+    const {hasDayMode} = await useDayMode();
 
     setTimeout(() => {
         const collapseButtons = document.querySelectorAll("[data-toggle='bills']");
