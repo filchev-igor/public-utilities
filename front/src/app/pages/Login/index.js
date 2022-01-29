@@ -59,11 +59,11 @@ class Login {
     #render = () => {
         return (`      
       <div class="container-fluid usual-pages background container-fluid">
-        <div class="row vh-100">
+        <div class="row min-vh-100">
           <div class="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
-            ${FloatingLabel(['email', 'Email', this.#email, this.#emailId])}
+            ${FloatingLabel(['email', 'Email', this.#email, this.#emailId, false])}
             
-            ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId])}
+            ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId, false])}
             
             <button type="button" id=${this.#loginButtonId} class="btn btn-outline-light">Log in</button>
             

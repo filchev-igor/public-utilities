@@ -53,8 +53,6 @@ class App {
                 .join(' ')
             : homePathName;
 
-        console.log(decodeURI(locationPath));
-
         if (user) {
             const isLocationPathExisting = AUTHENTICATED_PAGES_EN.includes(locationPath);
 
