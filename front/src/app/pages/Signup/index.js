@@ -2,6 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
+import {doc, setDoc} from "firebase/firestore";
+import { ROLES } from '../../constants/roles';
+import { getFirestore } from "firebase/firestore";
 
 class Signup {
     #email = '';
@@ -56,7 +59,30 @@ class Signup {
                 return;
 
             createUserWithEmailAndPassword(auth, this.#email, this.#password)
+                .then(async (userCredential) => {
+                    try {
+                        const obj = {
+                            role: ROLES.USER,
+                            name: {
+                                first: "",
+                                last: "",
+                            },
+                            creationTime: new Date(),
+                            publishedPosts: 0,
+                            hasDraft: false,
+                        };
+
+                        const db = getFirestore();
+
+                        await setDoc(doc(db, "users", userCredential.user.uid), obj);
+                    }
+                    // eslint-disable-next-line no-empty
+                    catch (err) {}
+                })
                 .then(() => {
+                    this.#email = '';
+                    this.#password = '';
+                    this.#passwordRepeat = '';
                     history.pushState({ path: '' }, '', `/`);
                     location.replace(`/`);
                 })

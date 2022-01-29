@@ -21,6 +21,11 @@ export const USUAL_PAGES_EN = [
     SIGN_UP_EN,
 ];
 
+export const USUAL_PAGES_LT = [
+    LOGIN_LT,
+    SIGN_UP_LT,
+];
+
 export const AUTHENTICATED_PAGES_EN = [
     NEWS_AND_MESSAGES_EN,
     BILLS_EN,
@@ -29,22 +34,17 @@ export const AUTHENTICATED_PAGES_EN = [
     SETTINGS_EN,
 ];
 
-export const AUTHORIZED_PAGES_EN = [
-    ...AUTHENTICATED_PAGES_EN,
-    CONTENT_ADDING_EN,
-];
-
-export const USUAL_PAGES_LT = [
-    LOGIN_LT,
-    SIGN_UP_LT,
-];
-
 export const AUTHENTICATED_PAGES_LT = [
     NEWS_AND_MESSAGES_LT,
     BILLS_LT,
     AMOUNTS_OF_CONSUMED_LT,
     CONTACTS_LT,
     SETTINGS_LT,
+];
+
+export const AUTHORIZED_PAGES_EN = [
+    ...AUTHENTICATED_PAGES_EN,
+    CONTENT_ADDING_EN,
 ];
 
 export const AUTHORIZED_PAGES_LT = [
