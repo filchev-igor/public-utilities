@@ -1,8 +1,11 @@
 import Navbar from '../../components/Navbar';
 import useDayMode from '../../utils/useDayMode';
+import useLithuanian from '../../utils/useLithuanian';
 
 const Contacts = async () => {
     const { hasDayMode } = await useDayMode();
+
+    const { isLithuanian } = await useLithuanian();
 
     return (`
       ${await Navbar()}
@@ -18,13 +21,13 @@ const Contacts = async () => {
               <div class="col-12 cols-sm-10 col-md-6 my-4 mx-auto">
                 <div class="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100">
                   <div class="card-body">
-                    <h5 class="card-title">VšĮ "Public utilities"</h5>
+                    <h5 class="card-title">${isLithuanian ? "VšĮ „Public utilities“" : "Public  institution „Public-utilities“"}</h5>
                     <p class="card-text">
                       Kalvariju g. 129-401
                     </p>
                       
                     <p class="card-text">
-                      <a href="tel:+370555555555555">+370555555555555</a>
+                      <a href="tel:+370555555555555">+370-555-555-555-555</a>
                     </p>
                       
                     <p class="card-text">                      
@@ -38,7 +41,7 @@ const Contacts = async () => {
               <div class="col-12 cols-sm-10 col-md-6 my-4 mx-auto">
                 <div class="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100">
                   <div class="card-body">
-                    <h5 class="card-title">Darbo laikas</h5>
+                    <h5 class="card-title"> ${isLithuanian ? "Darbo laikas" : "Work hours"}</h5>
                       
                     <p class="card-text">
                       I-IV 8:00 – 12:00 12:30 – 16:45
@@ -49,7 +52,7 @@ const Contacts = async () => {
                     </p>
                     
                     <p class="card-text">                      
-                      VI – VII nedirbame
+                       ${isLithuanian ? "VI – VII nedirbame" : "VI – VII closed"}
                     </p>                  
                   </div>
                 </div>
@@ -58,21 +61,21 @@ const Contacts = async () => {
               <div class="col-12 cols-sm-10 col-md-6 my-4 mx-auto">
                 <div class="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100">
                   <div class="card-body">
-                    <h5 class="card-title">Įmonės kodas 301847774</h5>
+                    <h5 class="card-title">${isLithuanian ? "Įmonės kodas 301847774" : "Company code 301847774"}</h5>
                     <p class="card-text">
-                      Registro Nr. 127597
+                      ${isLithuanian ? "Registro Nr. 127597" : "Registry Num. 127597"}
                     </p>
                       
                     <p class="card-text">
-                      Įreg. 2008 m. rugsėjo mėn. 04 d.
+                      ${isLithuanian ? "Įreg. 2008 m. rugsėjo mėn. 04 d." : "Reg. 2008 m. Semptember 04 th."}
                     </p>
                       
                     <p class="card-text">                      
-                      PVM mokėtojo kodas: LT104594286913
+                      ${isLithuanian ? "PVM mokėtojo kodas: LT104594286913" : "VAT code: LT104594286913"}
                     </p>
                     
                     <p class="card-text">                      
-                      VĮ Registrų centro Kauno fil.
+                     ${isLithuanian ? "VĮ Registrų centro Kauno fil." : "SE Center of Registers Kaunas branch"} 
                     </p>                  
                   </div>
                 </div>

@@ -131,24 +131,26 @@ const Navbar = async () => {
               </ul>
             </div>
           </div>
-
-          <button type="button" class="btn btn-${isLithuanian ? '' : 'outline-'}dark" id="${lithuanianButtonId}">
-            LT
-          </button>
-          
-          <button type="button" class="btn btn-${!isLithuanian ? '' : 'outline-'}dark" id="${englishButtonId}">
-            EN
-          </button>
-          
-          <button type="button" class="btn btn-dark" id="${lightModeButtonId}">
-            <i class="material-icons-outlined">light_mode</i>
-          </button>
-
-          <button type="button" class="btn btn-dark" id="${darkModeButtonId}">
-            <i class="material-icons-outlined">dark_mode</i>
-          </button>
-          
-           ${user ? await LogOutButton() : ''}
+            
+          <div class="col-4 text-end me-5">
+              <button type="button" class="btn btn-${isLithuanian ? '' : 'outline-'}dark" id="${lithuanianButtonId}">
+                LT
+              </button>
+              
+              <button type="button" class="btn btn-${!isLithuanian ? '' : 'outline-'}dark" id="${englishButtonId}">
+                EN
+              </button>
+              
+              <button type="button" class="btn btn-${hasDayMode ? '' : 'outline-'}dark" id="${lightModeButtonId}">
+                <i class="material-icons-outlined">light_mode</i>
+              </button>
+    
+              <button type="button" class="btn btn-${!hasDayMode ? '' : 'outline-'}dark" id="${darkModeButtonId}">
+                <i class="material-icons-outlined">dark_mode</i>
+              </button>
+       
+               ${user ? await LogOutButton() : ''}
+          </div>
         </nav>
     `);
 };
