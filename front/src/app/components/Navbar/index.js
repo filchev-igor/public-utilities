@@ -82,6 +82,9 @@ const Navbar = async () => {
     setTimeout(() => {
         const navbarCollapseButton = document.querySelectorAll(`[data-id='${navbarId}']`);
 
+        if (!navbarCollapseButton[0])
+            return;
+        
         navbarCollapseButton[0].onclick = () => {
             const collapseElement = document.getElementById(navbarId);
 
