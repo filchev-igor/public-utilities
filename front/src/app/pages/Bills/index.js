@@ -1,9 +1,12 @@
-//import {getBillsType} from "../../api/example.js";
 import Navbar from '../../components/Navbar';
 import useDayMode from '../../utils/useDayMode';
+import useLithuanian from '../../utils/useLithuanian';
+import { MORE_INFO_EN, MORE_INFO_LT } from '../../constants/bills';
 
 const Bills = async () => {
     const {hasDayMode} = await useDayMode();
+
+    const { isLithuanian } = await useLithuanian();
 
     setTimeout(() => {
         const collapseButtons = document.querySelectorAll("[data-toggle='bills']");
@@ -28,10 +31,10 @@ const Bills = async () => {
                     <ul class="list-group">
                       <li class="list-group-item ${!hasDayMode ? 'bg-night-mode border-white text-white' : 'text-dark border-dark'}">
                         <div class="align-items-center d-flex justify-content-between">
-                            January 2022
+                            ${isLithuanian ? "Sausis 2022" : "January 2022"}
                             
                             <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}" type="button" data-toggle="bills" data-id="collapseExample1">
-                                More info
+                                ${isLithuanian ? MORE_INFO_LT : MORE_INFO_EN}
                             </a>
                         </div>
                         
@@ -46,18 +49,16 @@ const Bills = async () => {
                       
                       <li class="list-group-item ${!hasDayMode ? 'bg-night-mode border-white text-white' : 'text-dark border-dark'}">
                         <div class="align-items-center d-flex justify-content-between">
-                            January 2022
+                            ${isLithuanian ? "Vasaris 2022" : "February 2022"}
                             
                             <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}"" type="button" data-toggle="bills" data-id="collapseExample2">
-                                More info
+                                ${isLithuanian ? MORE_INFO_LT : MORE_INFO_EN}
                             </a>
                         </div>
                         
                         <div class="collapse" id="collapseExample2">
                           <div class="card card-body">
                               <i class="material-icons">filter_drama</i>
-                            
-    
                           </div>
                         </div>
                       </li>
@@ -66,19 +67,6 @@ const Bills = async () => {
             </div>
         </div>
     `);
-
-    /*
-    You can add async/await
-     */
-    //const billsTypes = getBillsType();
-
-    /*
-    return (`
-        ${Navbar()}
-
-        <div>Here is the content of the bills page. Fetch url: ${billsTypes}</div>
-    `);
-     */
 };
 
 export default Bills;

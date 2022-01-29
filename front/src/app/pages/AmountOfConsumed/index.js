@@ -1,8 +1,20 @@
 import Navbar from '../../components/Navbar';
 import useDayMode from '../../utils/useDayMode';
+import useLithuanian from '../../utils/useLithuanian';
+import {
+    COLD_WATER_EN,
+    COLD_WATER_LT,
+    COUNTER_MONTH_DIFFERENCE_EN,
+    COUNTER_MONTH_DIFFERENCE_LT,
+    COUNTER_READINGS_EN,
+    COUNTER_READINGS_LT, HOT_WATER_EN,
+    HOT_WATER_LT, SAVE_CHANGES_EN, SAVE_CHANGES_LT,
+} from '../../constants/amountsOfConsumed';
 
 const AmountOfConsumed = async () => {
     const { hasDayMode } = await useDayMode();
+
+    const { isLithuanian } = await useLithuanian();
 
     return (`
         ${await Navbar()}
@@ -12,35 +24,35 @@ const AmountOfConsumed = async () => {
             <table class="table table-hover ${!hasDayMode ? 'border border-dark' : ''}" style="${!hasDayMode ? 'background-color: #b1b1b1;' : ''}">
                 <tbody>
                     <tr>
-                      <th>Sausis 2022</th>
-                      <th>Skirtumas</th>
-                      <th>Skaitliuko rodmenys</th>
+                      <th>${isLithuanian ? "Sausis 2022" : "January 2022"}</th>
+                      <th>${isLithuanian ? COUNTER_MONTH_DIFFERENCE_LT : COUNTER_MONTH_DIFFERENCE_EN}</th>
+                      <th>${isLithuanian ? COUNTER_READINGS_LT : COUNTER_READINGS_EN}</th>
                       <th></th>
                     </tr>
   
                     <tr>
-                      <th>Karstas vanduo</th>
+                      <th>${isLithuanian ? HOT_WATER_LT : HOT_WATER_EN}</th>
                       <td>
                         <span>6</span>
                       </td>
                       <td>
-                        <input type="number" style="width: 100px;">
+                        <input type="number" class="form-control w-50">
                       </td>
                       <td>
-                        <button type="button" class="btn btn-outline-success">Irasyti pakeitimus</button>
+                        <button type="button" class="btn btn-outline-success">${isLithuanian ? SAVE_CHANGES_LT : SAVE_CHANGES_EN}</button>
                       </td>
                     </tr>
                     
                     <tr>
-                      <th>Saltas vanduo</th>
+                      <th>${isLithuanian ? COLD_WATER_LT : COLD_WATER_EN}</th>
                       <td>
                         <span>6</span>
                       </td>
                       <td>
-                        <input type="number" style="width: 100px;">
+                        <input type="number" class="form-control w-50">
                       </td>
                       <td>
-                        <button type="button" class="btn btn-outline-success">Irasyti pakeitimus</button>
+                        <button type="button" class="btn btn-outline-success">${isLithuanian ? SAVE_CHANGES_LT : SAVE_CHANGES_EN}</button>
                       </td>
                     </tr>
     
