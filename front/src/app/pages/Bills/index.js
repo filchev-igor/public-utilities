@@ -1,61 +1,70 @@
 //import {getBillsType} from "../../api/example.js";
 import Navbar from '../../components/Navbar';
+import useLightMode from '../../utils/useLightMode';
 
 const Bills = async () => {
+    const {hasDayMode} = await useLightMode();
+
+    setTimeout(() => {
+        const collapseButtons = document.querySelectorAll("[data-toggle='bills']");
+
+        const handleCollapse = (button) => {
+            const id = button.dataset.id;
+            const collapseElement = document.getElementById(id);
+
+            collapseElement.classList.toggle('show');
+        };
+
+        collapseButtons.forEach((button) => {
+            button.onclick = () => handleCollapse(button);
+        });
+    }, 100);
+
     return (`
         ${await Navbar()}
-        
-        <div class="container-fluid">
+        <div class="container-fluid ${!hasDayMode ? 'bg-night-mode' : ''} min-vh-100">
             <div class="row">
-              <div class="col s12">
-                <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-                          <span class="card-title">January 2022</span>
-                          <p>VM123456/45678</p>
-                          <p>140$</p>
-                          <p>Payment for gas, communal utilities and electricity</p>
+                <div class="col mt-4">
+                    <ul class="list-group">
+                      <li class="list-group-item ${!hasDayMode ? 'bg-night-mode border-white text-white' : 'text-dark border-dark'}">
+                        <div class="align-items-center d-flex justify-content-between">
+                            January 2022
+                            
+                            <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}" type="button" data-toggle="bills" data-id="collapseExample1">
+                                More info
+                            </a>
                         </div>
-                        <div class="card-action">
-                          <button class="btn waves-effect waves-light" type="submit" name="action">
-                        Pay
                         
-                        <i class="material-icons right">payment</i>
-                    </button>
+                        <div class="collapse" id="collapseExample1">
+                          <div class="card card-body">
+                              <i class="material-icons">filter_drama</i>
+                            
+    
+                          </div>
                         </div>
-                      </div>
+                      </li>
                       
-                      <ul class="collapsible">
-                    <li>
-                      <div class="collapsible-header"><i class="material-icons">filter_drama</i>December 2021</div>
-                      <div class="collapsible-body">
-                          <span>
-                          VM123456/56776
-                          <br>
-                          <p>90$</p>
-                          <br>
-                          <p>Payment for gas, communal utilities and electricity</p>
-                          </span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Novermber 2021</div>
-                      <div class="collapsible-body">
-                          <span>
-                          VM123456/5678
-                          <br>
-                          <p>78$</p>
-                          <br>
-                          <p>Payment for gas, communal utilities and electricity</p>
-                          </span>
-                      </div>
-                    </li>
-                  </ul>
-                  
-              </div>
+                      <li class="list-group-item ${!hasDayMode ? 'bg-night-mode border-white text-white' : 'text-dark border-dark'}">
+                        <div class="align-items-center d-flex justify-content-between">
+                            January 2022
+                            
+                            <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}"" type="button" data-toggle="collapse" data-id="collapseExample2">
+                                More info
+                            </a>
+                        </div>
+                        
+                        <div class="collapse" id="collapseExample2">
+                          <div class="card card-body">
+                              <i class="material-icons">filter_drama</i>
+                            
+    
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                </div>
             </div>
         </div>
-      
-        
     `);
 
     /*
