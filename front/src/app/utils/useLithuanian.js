@@ -1,8 +1,9 @@
 import { getDataByKey, setDataByKey } from '../IndexedDb';
 import App from '../../index';
+import { IS_LITHUANIAN } from '../constants/language';
 
 const useLithuanian = async () => {
-    const key = 'isLithuanian';
+    const key = IS_LITHUANIAN;
 
     const isLithuanian = await getDataByKey(key, true);
 

@@ -2,6 +2,7 @@ import Navbar from '../../components/Navbar';
 import useDayMode from '../../utils/useDayMode';
 import useLithuanian from '../../utils/useLithuanian';
 import { MORE_INFO_EN, MORE_INFO_LT } from '../../constants/bills';
+import getMonthAndYearDate from '../../utils/getMonthAndYearDate';
 
 const Bills = async () => {
     const {hasDayMode} = await useDayMode();
@@ -31,7 +32,7 @@ const Bills = async () => {
                     <ul class="list-group">
                       <li class="list-group-item ${!hasDayMode ? 'bg-night-mode border-white text-white' : 'text-dark border-dark'}">
                         <div class="align-items-center d-flex justify-content-between">
-                            ${isLithuanian ? "Sausis 2022" : "January 2022"}
+                            ${getMonthAndYearDate([isLithuanian, 0])}
                             
                             <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}" type="button" data-toggle="bills" data-id="collapseExample1">
                                 ${isLithuanian ? MORE_INFO_LT : MORE_INFO_EN}
@@ -49,7 +50,7 @@ const Bills = async () => {
                       
                       <li class="list-group-item ${!hasDayMode ? 'bg-night-mode border-white text-white' : 'text-dark border-dark'}">
                         <div class="align-items-center d-flex justify-content-between">
-                            ${isLithuanian ? "Vasaris 2022" : "February 2022"}
+                            ${getMonthAndYearDate([isLithuanian, 1])}
                             
                             <button class="btn btn-outline-${hasDayMode ? 'dark' : 'light'}"" type="button" data-toggle="bills" data-id="collapseExample2">
                                 ${isLithuanian ? MORE_INFO_LT : MORE_INFO_EN}
