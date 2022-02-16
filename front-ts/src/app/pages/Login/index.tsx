@@ -1,83 +1,61 @@
-import { v4 as uuidv4 } from 'uuid';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import FloatingLabel from '../../components/FloatingLabel';
+import React, { useState } from 'react';
 import ErrorMessage from '../../components/ErrorMessage';
+import FloatingLabel from '../../components/FloatingLabel';
 
-class Login {
-  #email = '';
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  #password = '';
-
-  #emailId = uuidv4();
-
-  #passwordId = uuidv4();
-
-  #loginButtonId = uuidv4();
-
-  #root = document.getElementById('root');
-
-  #error = {};
-
-  constructor() {
-    this.#root.innerHTML = this.#render();
-    this.#componentMount();
-  }
-
-  #componentMount = () => {
-    const emailInput = document.getElementById(this.#emailId);
-    const passwordInput = document.getElementById(this.#passwordId);
-
-    const loginButton = document.getElementById(this.#loginButtonId);
-
+  const handleLogin = () => {
     const auth = getAuth();
 
-    emailInput.addEventListener('input', (e) => {
-      e.preventDefault();
+    if (!email.length || !password.length) return;
 
-      this.#email = e.target.value;
-    });
-
-    passwordInput.addEventListener('input', (e) => {
-      e.preventDefault();
-
-      this.#password = e.target.value;
-    });
-
-    loginButton.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      if (!this.#email.length || !this.#password.length) { return; }
-
-      signInWithEmailAndPassword(auth, this.#email, this.#password)
-        .then(() => {
-          history.pushState({ path: '' }, '', '/');
-          location.replace('/');
-        })
-        .catch((error) => {
-          this.#error = error;
-
-          this.#root.innerHTML = this.#render();
-        });
-    });
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        // history.pushState({ path: '' }, '', '/');
+        // location.replace('/');
+      })
+      .catch((err) => {
+        setError(err);
+      });
   };
 
-  #render = () => (`      
-      <div class="container-fluid usual-pages background container-fluid">
-        <div class="row min-vh-100">
-          <div class="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
-            ${FloatingLabel(['email', 'Email', this.#email, this.#emailId, false])}
-            
-            ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId, false])}
-            
-            <button type="button" id=${this.#loginButtonId} class="btn btn-outline-light">Log in</button>
-            
-            <a href="/sign-up" class="link-info d-block">Create new user</a>
-            
-            ${this.#error?.code ? ErrorMessage(this.#error) : ''}
-          </div>
+  const emailProps = {
+    type: 'email',
+    placeholder: 'E-mail',
+    value: email,
+    onChange: setEmail,
+    isCreatingAccount: false,
+  };
+
+  const passwordProps = {
+    type: 'email',
+    placeholder: 'E-mail',
+    value: email,
+    onChange: setPassword,
+    isCreatingAccount: false,
+  };
+
+  return (
+    <div className="container-fluid usual-pages background container-fluid">
+      <div className="row min-vh-100">
+        <div className="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
+          <FloatingLabel {...emailProps} />
+
+          <FloatingLabel {...passwordProps} />
+
+          <button type="button" className="btn btn-outline-light" onClick={handleLogin}>Log in</button>
+
+          <a href="/sign-up" className="link-info d-block">Create new user</a>
+
+          {error?.code && ErrorMessage(error)}
         </div>
       </div>
-    `);
+    </div>
+  );
 }
 
 export default Login;

@@ -5,146 +5,98 @@ import {
   sendEmailVerification,
 } from 'firebase/auth';
 import { doc, setDoc, getFirestore } from 'firebase/firestore';
+import React, { useState } from 'react';
 import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
 import { ROLES } from '../../constants/roles';
 
-class Signup {
-  #email = '';
+function Signup() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [error, setError] = useState({});
 
-  #password = '';
-
-  #passwordRepeat = '';
-
-  #emailId = uuidv4();
-
-  #passwordId = uuidv4();
-
-  #passwordRepeatId = uuidv4();
-
-  #signupButtonId = uuidv4();
-
-  #root = document.getElementById('root');
-
-  #error = { };
-
-  constructor() {
-    this.#root.innerHTML = this.#render();
-    this.#componentMount();
-  }
-
-  #componentMount = () => {
-    const emailInput = document.getElementById(this.#emailId);
-    const passwordInput = document.getElementById(this.#passwordId);
-    const passwordRepeatInput = document.getElementById(this.#passwordRepeatId);
-
-    const loginButton = document.getElementById(this.#signupButtonId);
-
+  const handleSignup = () => {
     const auth = getAuth();
 
-    emailInput.addEventListener('input', (e) => {
-      e.preventDefault();
+    if (!email.length || !password.length) return;
 
-      this.#email = e.target.value;
-    });
+    if (password !== passwordRepeat) return;
 
-    passwordInput.addEventListener('input', (e) => {
-      e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        await sendEmailVerification(userCredential.user);
 
-      this.#password = e.target.value;
-    });
+        try {
+          const obj = {
+            role: ROLES.USER,
+            name: {
+              first: '',
+              last: '',
+            },
+            addressesNumber: 0,
+            dates: {
+              created: new Date(),
+            },
+          };
 
-    passwordRepeatInput.addEventListener('input', (e) => {
-      e.preventDefault();
+          const db = getFirestore();
 
-      this.#passwordRepeat = e.target.value;
-    });
-
-    loginButton.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      if (!this.#email.length || !this.#password.length) { return; }
-
-      if (!this.#passwordRepeat.length && this.#password !== this.#passwordRepeat) { return; }
-
-      createUserWithEmailAndPassword(auth, this.#email, this.#password)
-        .then(async (userCredential) => {
-          await sendEmailVerification(userCredential.user);
-
-          try {
-            const obj = {
-              role: ROLES.USER,
-              name: {
-                first: '',
-                last: '',
-              },
-              addressesNumber: 0,
-              dates: {
-                created: new Date(),
-              },
-            };
-            /*
-                        userId,
-                          addresses: {
-                            country: "Lithuania",
-                              city: "Vilnius",
-                              isCity: true,
-                              street: '',
-                              number: '',
-                              postIndex: '',
-                        }, */
-            /*
-                        services: {
-                          hasMaintenanceServices: false,
-                          Cleaning of the communal areas
-                          Electricity of the communal areas
-                          Maintenance of the heating system and hot water supply system
-                          Contribution to the fund of renovation
-                          Maintanance of the intercom
-                          Householders association's properties administration
-                        }, */
-
-            const db = getFirestore();
-
-            await setDoc(doc(db, 'users', userCredential.user.uid), obj);
-          }
-          // eslint-disable-next-line no-empty
-          catch (err) {}
-        })
-        .then(() => {
-          this.#email = '';
-          this.#password = '';
-          this.#passwordRepeat = '';
-          history.pushState({ path: '' }, '', '/');
-          location.replace('/');
-        })
-        .catch((error) => {
-          this.#error = error;
-
-          this.#root.innerHTML = this.#render();
-        });
-    });
+          await setDoc(doc(db, 'users', userCredential.user.uid), obj);
+        }
+        // eslint-disable-next-line no-empty
+        catch (err) {}
+      })
+      .then(() => {
+        setEmail('');
+        setPassword('');
+        setPasswordRepeat('');
+        // history.pushState({ path: '' }, '', '/');
+        // location.replace('/');
+      })
+      .catch((err) => setError(err));
   };
 
-  #render = () => (`
-          <div class="container-fluid usual-pages background">
-            <div class="row vh-100">
-              <div class="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
-                ${FloatingLabel(['email', 'Email', this.#email, this.#emailId, true])}
-                
-                ${FloatingLabel(['password', 'Password', this.#password, this.#passwordId, true])}
-                
-                ${FloatingLabel(['password', 'Repeat password', this.#passwordRepeat, this.#passwordRepeatId, true])}
-                
-                <button type="button" id=${this.#signupButtonId} class="btn btn-outline-light">Sign up</button>
-                
-                <a href="/login" class="link-info d-block">I have account</a>
-                
-                ${this.#error?.code ? ErrorMessage(this.#error) : ''}
-              </div>
-            </div>
-          </div>
-        `);
+  const emailProps = {
+    type: 'email',
+    placeholder: 'E-mail',
+    value: email,
+    onChange: setEmail,
+  };
+
+  const passwordProps = {
+    type: 'email',
+    placeholder: 'E-mail',
+    value: email,
+    onChange: setPassword,
+  };
+
+  const passwordRepeatProps = {
+    type: 'email',
+    placeholder: 'E-mail',
+    value: email,
+    onChange: setPasswordRepeat,
+  };
+
+  return (
+    <div className="container-fluid usual-pages background">
+      <div className="row vh-100">
+        <div className="login-window col-10 col-md-6 col-lg-4 p-4 text-center mx-auto my-auto">
+          <FloatingLabel {...emailProps} />
+
+          <FloatingLabel {...passwordProps} />
+
+          <FloatingLabel {...passwordRepeatProps} />
+
+          <button type="button" className="btn btn-outline-light" onClick={handleSignup}>Sign up</button>
+
+          <a href="/login" className="link-info d-block">I have account</a>
+
+          {error?.code && ErrorMessage(error)}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Signup;
