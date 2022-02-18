@@ -1,15 +1,12 @@
-import App from '../../index';
-import { getDataByKey, setDataByKey } from '../IndexedDb';
+import { getDataByKey, setDataByKey } from '../indexedDb';
 
-const useDayMode = async () => {
+const useDayMode = () => {
   const key = 'hasDayMode';
 
-  const hasDayMode = await getDataByKey(key, true);
+  const hasDayMode = getDataByKey(key, true);
 
   const setHasDayMode = (isLightModeSelected = true) => async () => {
     await setDataByKey(isLightModeSelected, key);
-
-    new App(true);
   };
 
   return { hasDayMode, setHasDayMode };

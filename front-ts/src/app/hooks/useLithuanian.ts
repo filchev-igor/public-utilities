@@ -1,16 +1,13 @@
-import { getDataByKey, setDataByKey } from '../IndexedDb';
-import App from '../../index';
-import { IS_LITHUANIAN } from '../constants/language';
+import { getDataByKey, setDataByKey } from '../indexedDb';
+import { IS_LITHUANIAN } from '../constants/languages';
 
-const useLithuanian = async () => {
+const useLithuanian = () => {
   const key = IS_LITHUANIAN;
 
-  const isLithuanian = await getDataByKey(key, true);
+  const isLithuanian = getDataByKey(key, true);
 
-  const setIsLithuanian = (isLithuanianSelected = true) => async () => {
+  const setIsLithuanian = async (isLithuanianSelected = true) => {
     await setDataByKey(isLithuanianSelected, key);
-
-    new App(true);
   };
 
   return { isLithuanian, setIsLithuanian };

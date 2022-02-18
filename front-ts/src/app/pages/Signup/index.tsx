@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -6,6 +5,7 @@ import {
 } from 'firebase/auth';
 import { doc, setDoc, getFirestore } from 'firebase/firestore';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
 import { ROLES } from '../../constants/roles';
@@ -15,6 +15,8 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const [error, setError] = useState({});
+
+  const navigate = useNavigate();
 
   const handleSignup = () => {
     const auth = getAuth();
@@ -51,8 +53,8 @@ function Signup() {
         setEmail('');
         setPassword('');
         setPasswordRepeat('');
-        // history.pushState({ path: '' }, '', '/');
-        // location.replace('/');
+
+        navigate('/');
       })
       .catch((err) => setError(err));
   };

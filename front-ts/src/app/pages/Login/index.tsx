@@ -1,12 +1,15 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ErrorMessage from '../../components/ErrorMessage';
 import FloatingLabel from '../../components/FloatingLabel';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState({});
+
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     const auth = getAuth();
@@ -15,8 +18,7 @@ function Login() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        // history.pushState({ path: '' }, '', '/');
-        // location.replace('/');
+        navigate('/');
       })
       .catch((err) => {
         setError(err);

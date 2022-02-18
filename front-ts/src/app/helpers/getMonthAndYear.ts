@@ -1,6 +1,6 @@
-import { GB_LOCALE, LT_LOCALE } from '../constants/language';
+import { GB_LOCALE, LT_LOCALE } from '../constants/languages';
 
-const getMonthAndYear = ({ isLithuanian = true, monthBack = 0 }) => {
+const getMonthAndYear = ({ isLithuanian = true, monthBack = 0 } = {}) => {
   const locale = isLithuanian ? LT_LOCALE : GB_LOCALE;
   const date = new Date();
 
