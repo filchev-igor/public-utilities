@@ -3,11 +3,13 @@ import {
   ADDRESS_UTILITIES,
 } from '../../constants/settings';
 import Navbar from '../../components/Navbar';
+import FloatingLabel from '../../components/FloatingLabel';
 
 const Settings = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
@@ -38,13 +40,11 @@ const Settings = () => {
         <div className="row">
           <div className="col mt-4">
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" value={name} id="firstName" placeholder="Name" />
-              <label htmlFor="firstName">Name</label>
+              <FloatingLabel onChange={setName} placeholder="Name" value={name} />
             </div>
 
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" value={surname} id="surname" placeholder="Surname" autoComplete="off" />
-              <label htmlFor="surname">Surname</label>
+              <FloatingLabel onChange={setSurname} placeholder="Surname" value={surname} />
             </div>
 
             <div>
@@ -52,23 +52,19 @@ const Settings = () => {
             </div>
 
             <div className="form-floating my-3">
-              <input type="email" className="form-control" id="email" value={email} placeholder="E-mail" autoComplete="off" />
-              <label htmlFor="email">E-mail</label>
+              <FloatingLabel onChange={setEmail} placeholder="E-mail" value={email} type="email" />
             </div>
 
             <div className="form-floating mb-3">
-              <input type="password" className="form-control" id="currentPassword" value="" placeholder="Current password (required only for password and email change)" autoComplete="new-password" />
-              <label htmlFor="currentPassword">Current password (required only for password and email change)</label>
+              <FloatingLabel onChange={setCurrentPassword} placeholder="Current password (required for the change of e-mail only)" value={currentPassword} type="password" isCreatingAccount />
             </div>
 
             <div className="form-floating mb-3">
-              <input type="password" className="form-control" id="password" value="" placeholder="Password" autoComplete="new-password" />
-              <label htmlFor="password">Password</label>
+              <FloatingLabel onChange={setPassword} placeholder="Password" value={password} type="password" isCreatingAccount />
             </div>
 
             <div className="form-floating mb-3">
-              <input type="password" className="form-control" id="passwordRepeat" value="" placeholder="Repeat password" autoComplete="new-password" />
-              <label htmlFor="passwordRepeat">Repeat password</label>
+              <FloatingLabel onChange={setPasswordRepeat} placeholder="Repeat password" value={passwordRepeat} type="password" isCreatingAccount />
             </div>
 
             <div className="d-flex justify-content-between">
@@ -84,23 +80,15 @@ const Settings = () => {
                   <th>Utilities</th>
                 </tr>
               </thead>
-
-              <tbody />
             </table>
 
-            {switches}
-
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" id="newAddressStreet" placeholder="New address (street)" autoComplete="off" />
-              <label htmlFor="newAddress">New address (street)</label>
-            </div>
+              addresses
 
-            <div className="form-floating mb-3">
-              <input type="number" className="form-control" id="newAddressNumber" placeholder="New address (number)" autoComplete="off" />
-              <label htmlFor="newAddress">New address (number)</label>
-            </div>
+              {switches}
 
-            <button type="button" className="btn btn-success" onClick={handleAddNewAddress}>Add new address</button>
+              <button type="button" className="btn btn-success">Add new address</button>
+            </div>
           </div>
         </div>
       </div>

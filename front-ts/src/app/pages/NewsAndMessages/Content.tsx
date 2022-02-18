@@ -1,10 +1,8 @@
 import React from 'react';
-import useDayMode from '../../utils/useDayMode';
-import useLithuanian from '../../utils/useLithuanian';
 
 const Content = () => {
-  const { hasDayMode } = useDayMode();
-  const { isLithuanian } = useLithuanian();
+  const hasDayMode = true;
+  const isLithuanian = true;
 
   return (
     <div className={`container-fluid ${!hasDayMode && 'bg-night-mode'} min-vh-100`}>

@@ -1,6 +1,4 @@
 import React from 'react';
-import useLithuanian from '../../hooks/useLithuanian';
-import useDayMode from '../../hooks/useDayMode';
 import {
   COLD_WATER_EN,
   COLD_WATER_LT,
@@ -12,8 +10,8 @@ import getMonthAndYear from '../../helpers/getMonthAndYear';
 import Navbar from '../../components/Navbar';
 
 const AmountOfConsumed = () => {
-  const { hasDayMode } = useDayMode();
-  const { isLithuanian = true } = useLithuanian();
+  const hasDayMode = true;
+  const isLithuanian = true;
 
   return (
     <>
@@ -21,7 +19,7 @@ const AmountOfConsumed = () => {
 
       <div className={`container-fluid ${!hasDayMode ? 'bg-night-mode' : ''} min-vh-100`}>
         <div className="row">
-          <table className={`table table-hover ${!hasDayMode ? 'border border-dark' : ''}`} style={!hasDayMode ? 'background-color: #b1b1b1;' : ''}>
+          <table className={`table table-hover ${!hasDayMode ? 'border border-dark' : ''}`} style={!hasDayMode ? { backgroundColor: '#b1b1b1' } : {}}>
             <tbody>
               <tr>
                 <th>{getMonthAndYear({ isLithuanian })}</th>
@@ -59,7 +57,6 @@ const AmountOfConsumed = () => {
                 <th>{getMonthAndYear({ isLithuanian, monthBack: 1 })}</th>
                 <th>Skirtumas</th>
                 <th>Skaitliuko rodmenys</th>
-                <th />
               </tr>
 
               <tr>

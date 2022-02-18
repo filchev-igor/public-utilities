@@ -9,11 +9,11 @@ const Contacts = () => {
     <>
       <Navbar />
 
-      <div className="container-fluid ${!hasDayMode ? 'bg-night-mode' : ''} min-vh-100">
+      <div className={`container-fluid ${!hasDayMode ? 'bg-night-mode' : ''} min-vh-100`}>
         <div className="row row-cols-1">
           <div className="col mt-4">
             <div className="card">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1938.1284173108193!2d25.285978341455912!3d54.712506619843914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd9424f9078fdd%3A0x7b569e1a6c96f924!2sVilniaus%20verslo%20kolegija!5e0!3m2!1slt!2slt!4v1643394553972!5m2!1slt!2slt" width="100%" height="450" style="border:0;" allowFullScreen="" loading="lazy" />
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1938.1284173108193!2d25.285978341455912!3d54.712506619843914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd9424f9078fdd%3A0x7b569e1a6c96f924!2sVilniaus%20verslo%20kolegija!5e0!3m2!1slt!2slt!4v1643394553972!5m2!1slt!2slt" width="100%" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" title="map" />
             </div>
           </div>
 
@@ -38,7 +38,7 @@ const Contacts = () => {
           </div>
 
           <div className="col-12 cols-sm-10 col-md-6 my-4 mx-auto">
-            <div className="card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100">
+            <div className={`card ${!hasDayMode ? 'bg-night-mode border-white text-white' : ''} text-center h-100`}>
               <div className="card-body">
                 <h5 className="card-title">{isLithuanian ? 'Darbo laikas' : 'Work hours'}</h5>
 
