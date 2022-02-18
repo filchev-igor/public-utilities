@@ -2,7 +2,7 @@ import React from 'react';
 import useDayMode from '../../utils/useDayMode';
 import useLithuanian from '../../utils/useLithuanian';
 
-function Content() {
+const Content = () => {
   const { hasDayMode } = useDayMode();
   const { isLithuanian } = useLithuanian();
 
@@ -53,6 +53,6 @@ function Content() {
       </div>
     </div>
   );
-}
+};
 
 export default Content;

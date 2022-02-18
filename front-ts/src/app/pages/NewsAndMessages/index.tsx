@@ -2,14 +2,12 @@ import React from 'react';
 import Navbar from '../../components/Navbar';
 import Content from './Content';
 
-function NewsAndMessages() {
-  return (
-    <>
-      <Navbar />
+const NewsAndMessages = () => (
+  <>
+    <Navbar />
 
-      <Content />
-    </>
-  );
-}
+    <Content />
+  </>
+);
 
 export default NewsAndMessages;

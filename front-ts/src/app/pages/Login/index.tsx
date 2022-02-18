@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ErrorMessage from '../../components/ErrorMessage';
 import FloatingLabel from '../../components/FloatingLabel';
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState({});
@@ -58,6 +58,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

@@ -10,7 +10,7 @@ import FloatingLabel from '../../components/FloatingLabel';
 import ErrorMessage from '../../components/ErrorMessage';
 import { ROLES } from '../../constants/roles';
 
-function Signup() {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
@@ -99,6 +99,6 @@ function Signup() {
       </div>
     </div>
   );
-}
+};
 
 export default Signup;

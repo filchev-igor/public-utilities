@@ -11,7 +11,7 @@ import {
 import getMonthAndYear from '../../helpers/getMonthAndYear';
 import Navbar from '../../components/Navbar';
 
-function AmountOfConsumed() {
+const AmountOfConsumed = () => {
   const { hasDayMode } = useDayMode();
   const { isLithuanian = true } = useLithuanian();
 
@@ -113,6 +113,6 @@ function AmountOfConsumed() {
       </div>
     </>
   );
-}
+};
 
 export default AmountOfConsumed;

@@ -12,7 +12,7 @@ import useLithuanian from '../../utils/useLithuanian';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+const Navbar = () => {
   const { hasDayMode, setHasDayMode } = useDayMode();
   const { isLithuanian, setIsLithuanian } = useLithuanian();
 
@@ -81,6 +81,6 @@ function Navbar() {
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

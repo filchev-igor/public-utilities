@@ -1,12 +1,9 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
-import useDayMode from '../../utils/useDayMode';
-import useLithuanian from '../../utils/useLithuanian';
 
-function Contacts() {
-  const { hasDayMode } = await useDayMode();
-
-  const { isLithuanian } = await useLithuanian();
+const Contacts = () => {
+  const hasDayMode = true;
+  const isLithuanian = true;
 
   return (
     <>
@@ -86,6 +83,6 @@ function Contacts() {
       </div>
     </>
   );
-}
+};
 
 export default Contacts;

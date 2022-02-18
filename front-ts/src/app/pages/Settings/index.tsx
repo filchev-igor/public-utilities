@@ -4,7 +4,7 @@ import {
 } from '../../constants/settings';
 import Navbar from '../../components/Navbar';
 
-function Settings() {
+const Settings = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -106,6 +106,6 @@ function Settings() {
       </div>
     </>
   );
-}
+};
 
 export default Settings;

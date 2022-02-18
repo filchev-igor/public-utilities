@@ -27,7 +27,7 @@ import useAuth from './app/hooks/useAuth';
 import Login from './app/pages/Login';
 import Signup from './app/pages/Signup';
 
-function App() {
+const App = () => {
   initializeApp(FIREBASE_CONFIG);
 
   const { isInitializing, user } = useAuth();
@@ -53,6 +53,6 @@ function App() {
       <Route path={SIGN_UP_EN || SIGN_UP_LT} element={<Signup />} />
     </Routes>
   );
-}
+};
 
 export default App;
